@@ -18,7 +18,7 @@ statement
  | declaration ';'?
  | loop_statement ';'?
  | branch_statement ';'?
- | labeled_statement ';'?
+//  | labeled_statement ';'?
  | control_transfer_statement ';'? // proper logic with semicolons is not supported yet. compiler_control_statement should be separated with a newline, but not with a semicolon
  ;
 
@@ -45,9 +45,9 @@ locals [
 // GRAMMAR OF A LOOP STATEMENT
 
 loop_statement : for_statement
- | for_in_statement
+//  | for_in_statement
  | while_statement
- | repeat_while_statement
+//  | repeat_while_statement
  ;
 
 // GRAMMAR OF A FOR STATEMENT
@@ -61,7 +61,7 @@ for_init : variable_declaration | expression_list ;
 
 // GRAMMAR OF A FOR_IN STATEMENT
 
-for_in_statement : 'for' 'case'? pattern 'in' expression where_clause? code_block ;
+// for_in_statement : 'for' 'case'? pattern 'in' expression /*where_clause?*/ code_block ;
 
 // GRAMMAR OF A WHILE STATEMENT
 
@@ -75,7 +75,7 @@ condition
  | optional_binding_condition
  ;
  
-case_condition : 'case' pattern initializer where_clause? ;
+case_condition : 'case' pattern initializer /*where_clause?*/ ;
 
 optional_binding_condition
  : 'let' pattern initializer
@@ -84,12 +84,12 @@ optional_binding_condition
 
 // GRAMMAR OF A REPEAT-WHILE STATEMENT
 
-repeat_while_statement : 'repeat' code_block 'while' expression ;
+// repeat_while_statement : 'repeat' code_block 'while' expression ;
 
 // GRAMMAR OF A BRANCH STATEMENT
 
 branch_statement : if_statement
- | switch_statement
+//  | switch_statement
  ;
 
 // GRAMMAR OF AN IF STATEMENT
@@ -102,25 +102,25 @@ else_clause : 'else' code_block | 'else' if_statement  ;
 
 // GRAMMAR OF A SWITCH STATEMENT
 
-switch_statement : 'switch' expression '{' switch_cases? '}'  ;
-switch_cases : switch_case switch_cases? ;
-switch_case : case_label statements | default_label statements  ;
-case_label : 'case' case_item_list ':' ;
-case_item_list : pattern where_clause? | pattern where_clause? ',' case_item_list  ;
-default_label : 'default' ':' ;
-where_clause : 'where' where_expression ;
-where_expression : expression ;
+// switch_statement : 'switch' expression '{' switch_cases? '}'  ;
+// switch_cases : switch_case switch_cases? ;
+// switch_case : case_label statements | default_label statements  ;
+// case_label : 'case' case_item_list ':' ;
+// case_item_list : pattern where_clause? | pattern where_clause? ',' case_item_list  ;
+// default_label : 'default' ':' ;
+// where_clause : 'where' where_expression ;
+// where_expression : expression ;
 
 // GRAMMAR OF A LABELED STATEMENT
 
-labeled_statement
- : statement_label loop_statement
- | statement_label if_statement
- | statement_label switch_statement
- ;
+// labeled_statement
+//  : statement_label loop_statement
+//  | statement_label if_statement
+//  | statement_label switch_statement
+//  ;
  
-statement_label : label_name ':' ;
-label_name : declaration_identifier ;
+// statement_label : label_name ':' ;
+// label_name : declaration_identifier ;
 
 // GRAMMAR OF A CONTROL TRANSFER STATEMENT
 
@@ -131,11 +131,11 @@ control_transfer_statement : break_statement
 
 // GRAMMAR OF A BREAK STATEMENT
 
-break_statement : 'break' label_name? ;
+break_statement : 'break' /*label_name?*/ ;
 
 // GRAMMAR OF A CONTINUE STATEMENT
 
-continue_statement : 'continue' label_name? ;
+continue_statement : 'continue' /*label_name?*/ ;
 
 // GRAMMAR OF A FALLTHROUGH STATEMENT
 
@@ -154,28 +154,28 @@ return_statement : 'return' expression? ;
 
 // Generic Parameters and Arguments
 
-// GRAMMAR OF A GENERIC PARAMETER CLAUSE *****************************************************************************
+// GRAMMAR OF A GENERIC PARAMETER CLAUSE 
 
-generic_parameter_clause : '<' generic_parameter_list '>'  ;
-generic_parameter_list : generic_parameter (',' generic_parameter)*  ;
-generic_parameter
- : type_name
- | type_name ':' type_identifier
-//  | type_name ':' protocol_composition_type
- ;
+// generic_parameter_clause : '<' generic_parameter_list '>'  ;
+// generic_parameter_list : generic_parameter (',' generic_parameter)*  ;
+// generic_parameter
+//  : type_name
+//  | type_name ':' type_identifier
+// //  | type_name ':' protocol_composition_type
+//  ;
 
-generic_where_clause : 'where' requirement_list ;
-requirement_list : requirement (',' requirement)*  ;
-requirement : conformance_requirement | same_type_requirement  ;
+// generic_where_clause : 'where' requirement_list ;
+// requirement_list : requirement (',' requirement)*  ;
+// requirement : conformance_requirement | same_type_requirement  ;
 
-conformance_requirement : type_identifier ':' type_identifier /*| type_identifier ':' protocol_composition_type*/  ;
-same_type_requirement : type_identifier same_type_equals type  ;
+// conformance_requirement : type_identifier ':' type_identifier /*| type_identifier ':' protocol_composition_type*/  ;
+// same_type_requirement : type_identifier same_type_equals type  ;
 
-// GRAMMAR OF A GENERIC ARGUMENT CLAUSE*********************************************************************************
+// // GRAMMAR OF A GENERIC ARGUMENT CLAUSE*********************************************************************************
 
-generic_argument_clause : '<' generic_argument_list '>'  ;
-generic_argument_list : generic_argument (',' generic_argument)* ;
-generic_argument : type ;
+// generic_argument_clause : '<' generic_argument_list '>'  ;
+// generic_argument_list : generic_argument (',' generic_argument)* ;
+// generic_argument : type ;
 
 // GRAMMAR OF A DECLARATION
 
@@ -187,14 +187,14 @@ declaration
  | function_declaration
 //  | enum_declaration
  | struct_declaration
- | class_declaration
+//  | class_declaration
 //  | protocol_declaration
 //  | initializer_declaration
 //  | deinitializer_declaration
 //  | extension_declaration
 //  | subscript_declaration
  | operator_declaration
- | precedence_group_declaration
+//  | precedence_group_declaration
  ;
 
 declarations : declaration+ ;
@@ -210,14 +210,14 @@ code_block : '{' statements? '}' ;
 
 // GRAMMAR OF AN IMPORT DECLARATION
 
-import_declaration : attributes? 'import' import_kind? import_path  ;
+import_declaration : /*attributes?*/ 'import' import_kind? import_path  ;
 import_kind : 'typealias' | 'struct' | 'class' | 'enum' | 'protocol' | 'var' | 'func'  ;
 import_path : import_path_identifier ('.' import_path_identifier)*  ;
 import_path_identifier : declaration_identifier | operator  ;
 
 // GRAMMAR OF A CONSTANT DECLARATION
 
-constant_declaration : attributes? declaration_modifiers? 'let' pattern_initializer_list  ;
+constant_declaration : /*attributes?*/ declaration_modifiers? 'let' pattern_initializer_list  ;
 pattern_initializer_list : pattern_initializer (',' pattern_initializer)* ;
 
 /** rule is ambiguous. can match "var x = 1" with x as pattern
@@ -227,7 +227,7 @@ pattern_initializer_list : pattern_initializer (',' pattern_initializer)* ;
 pattern_initializer : pattern initializer? ;
 initializer : assignment_operator expression  ;
 
-// GRAMMAR OF A VARIABLE DECLARATION
+// GRAMMAR OF A VARIABLE DECLARATION //-----------------------------------------------------------------/
 
 variable_declaration
  : variable_declaration_head variable_name type_annotation code_block
@@ -238,28 +238,28 @@ variable_declaration
  | variable_declaration_head pattern_initializer_list
  ;
 
-variable_declaration_head : attributes? declaration_modifiers? 'var'  ;
+variable_declaration_head : /*attributes?*/ declaration_modifiers? 'var'  ;
 variable_name : declaration_identifier  ;
 
 getter_setter_block : '{' getter_clause setter_clause?'}'  | '{' setter_clause getter_clause '}'  ;
-getter_clause : attributes? mutation_modifier? 'get' code_block  ;
-setter_clause : attributes? mutation_modifier? 'set' setter_name? code_block  ;
+getter_clause : /*attributes?*/ mutation_modifier? 'get' code_block  ;
+setter_clause : /*attributes?*/ mutation_modifier? 'set' setter_name? code_block  ;
 setter_name : '(' declaration_identifier ')'  ;
 
 getter_setter_keyword_block : '{' getter_keyword_clause setter_keyword_clause?'}' | '{' setter_keyword_clause getter_keyword_clause '}'  ;
-getter_keyword_clause : attributes? mutation_modifier? 'get'  ;
-setter_keyword_clause : attributes? mutation_modifier? 'set'  ;
+getter_keyword_clause : /*attributes?*/ mutation_modifier? 'get'  ;
+setter_keyword_clause : /*attributes?*/ mutation_modifier? 'set'  ;
 
 willSet_didSet_block : '{' willSet_clause didSet_clause?'}' | '{' didSet_clause willSet_clause '}'  ;
-willSet_clause : attributes? 'willSet' setter_name? code_block  ;
-didSet_clause : attributes? 'didSet' setter_name? code_block  ;
+willSet_clause : /*attributes?*/ 'willSet' setter_name? code_block  ;
+didSet_clause : /*attributes?*/ 'didSet' setter_name? code_block  ;
 
 // GRAMMAR OF A TYPE ALIAS DECLARATION
 
 // GRAMMAR OF A FUNCTION DECLARATION
-function_declaration : function_head function_name generic_parameter_clause? function_signature generic_where_clause? function_body? ;
+function_declaration : function_head function_name /*generic_parameter_clause?*/ function_signature /*generic_where_clause?*/ function_body? ;
  
-function_head : attributes? declaration_modifiers? 'func' ;
+function_head : /*attributes?*/ declaration_modifiers? 'func' ;
 
 function_name : declaration_identifier | operator ;
 
@@ -268,7 +268,7 @@ function_signature
  | parameter_clause 'rethrows' function_result?
  ;
  
-function_result : arrow_operator attributes? type ;
+function_result : arrow_operator /*attributes?*/ type ;
 
 function_body : code_block ;
 
@@ -288,7 +288,7 @@ default_argument_clause : assignment_operator expression ;
 
 // GRAMMAR OF A STRUCTURE DECLARATION TODO did not update
 
-struct_declaration : attributes? access_level_modifier? 'struct' struct_name generic_parameter_clause? /*type_inheritance_clause?*/generic_where_clause? struct_body  ;
+struct_declaration : /*attributes?*/ access_level_modifier? 'struct' struct_name /*generic_parameter_clause?*/ /*type_inheritance_clause?*//*generic_where_clause?*/ struct_body  ;
 struct_name : declaration_identifier  ;
 struct_body : '{' struct_member* '}'  ;
 
@@ -296,14 +296,14 @@ struct_member : declaration ;
 
 // GRAMMAR OF A CLASS DECLARATION
 
-class_declaration
- : attributes? access_level_modifier? 'final'? 'class' class_name generic_parameter_clause? /*type_inheritance_clause?*/ generic_where_clause? class_body
- | attributes? access_level_modifier? 'final' access_level_modifier? 'class' class_name generic_parameter_clause? /*type_inheritance_clause?*/ generic_where_clause? class_body
- ;
-class_name : declaration_identifier ;
-class_body : '{' class_member* '}' ;
+// class_declaration
+//  : /*attributes?*/ access_level_modifier? 'final'? 'class' class_name /*eneric_parameter_clause?*/ /*type_inheritance_clause?*/ /*generic_where_clause?*/ class_body
+//  | /*attributes?*/ access_level_modifier? 'final' access_level_modifier? 'class' class_name /*generic_parameter_clause?*/ /*type_inheritance_clause?*/ /*generic_where_clause?*/ class_body
+//  ;
+// class_name : declaration_identifier ;
+// class_body : '{' class_member* '}' ;
 
-class_member : declaration ;
+// class_member : declaration ;
 
 // GRAMMAR OF AN OPERATOR DECLARATION
 
@@ -311,32 +311,32 @@ operator_declaration : prefix_operator_declaration | postfix_operator_declaratio
 
 prefix_operator_declaration : 'prefix' 'operator' operator ;
 postfix_operator_declaration : 'postfix' 'operator' operator ;
-infix_operator_declaration : 'infix' 'operator' operator infix_operator_group? ;
+infix_operator_declaration : 'infix' 'operator' operator /*infix_operator_group?*/ ;
 
-infix_operator_group : ':' precedence_group_name ;
+// infix_operator_group : ':' precedence_group_name ;
 
 // GRAMMAR OF A PRECEDENCE GROUP DECLARATION
 
-precedence_group_declaration : 'precedencegroup' precedence_group_name '{' precedence_group_attribute* '}' ;
+// precedence_group_declaration : 'precedencegroup' precedence_group_name '{' precedence_group_attribute* '}' ;
 
-precedence_group_attribute
- : precedence_group_relation
- | precedence_group_assignment
- | precedence_group_associativity
- ;
+// precedence_group_attribute
+//  : precedence_group_relation
+//  | precedence_group_assignment
+//  | precedence_group_associativity
+//  ;
 
-precedence_group_relation
- : 'higherThan' ':' precedence_group_names
- | 'lowerThan' ':' precedence_group_names
- ;
+// precedence_group_relation
+//  : 'higherThan' ':' precedence_group_names
+//  | 'lowerThan' ':' precedence_group_names
+//  ;
  
-precedence_group_assignment : 'assignment' ':' boolean_literal ;
+// precedence_group_assignment : 'assignment' ':' boolean_literal ;
 
-precedence_group_associativity : 'associativity' ':' associativity ;
-associativity : 'left' | 'right' | 'none' ;
+// precedence_group_associativity : 'associativity' ':' associativity ;
+// associativity : 'left' | 'right' | 'none' ;
 
-precedence_group_names : precedence_group_name (',' precedence_group_name)* ;
-precedence_group_name : declaration_identifier ;
+// precedence_group_names : precedence_group_name (',' precedence_group_name)* ;
+// precedence_group_name : declaration_identifier ;
 
 // GRAMMAR OF A DECLARATION MODIFIER
 declaration_modifier //***************************************************************************** */
@@ -409,11 +409,11 @@ expression_pattern : expression  ;
 
 // GRAMMAR OF AN ATTRIBUTE
 
-attribute : '@' attribute_name attribute_argument_clause? ;
-attribute_name : declaration_identifier  ;
-attribute_argument_clause : '('  balanced_tokens  ')'  ;
-attributes : attribute+ ;
-balanced_tokens : balanced_token* ;
+// attribute : '@' attribute_name attribute_argument_clause? ;
+// attribute_name : declaration_identifier  ;
+// attribute_argument_clause : '('  balanced_tokens  ')'  ;
+// attributes : attribute+ ;
+// balanced_tokens : balanced_token* ;
 
 // https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Attributes.html#//apple_ref/swift/grammar/attributes
 //
@@ -426,26 +426,26 @@ balanced_tokens : balanced_token* ;
 //
 // Example: @available(*, deprecated, message: "it will be removed in Swift 4.0.  Please use 'Collection' instead")
 // Apple doesn't provide proper grammar for attributes. It says "Any punctuation except (­, )­, [­, ]­, {­, or }­".
-balanced_token
- : '('  balanced_tokens ')'
- | '[' balanced_tokens ']'
- | '{' balanced_tokens '}'
- | label_identifier
- | literal 
- | operator
-// | Platform_name_platform_version // there is a kludge, see Platform_name_platform_version; it is a token
- | any_punctuation_for_balanced_token
- ;
+// balanced_token
+//  : '('  balanced_tokens ')'
+//  | '[' balanced_tokens ']'
+//  | '{' balanced_tokens '}'
+//  | label_identifier
+//  | literal 
+//  | operator
+// // | Platform_name_platform_version // there is a kludge, see Platform_name_platform_version; it is a token
+//  | any_punctuation_for_balanced_token
+//  ;
 
 // https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html#//apple_ref/swift/grammar/identifier
 // Quote:
 // The following tokens are reserved as punctuation and can’t be used as custom operators: (, ), {, }, [, ], ., ,, :, ;, =, @, #, & (as a prefix operator), ->, `, ?, and ! (as a postfix operator).
-any_punctuation_for_balanced_token :
-    ( '.' | ',' | ':' | ';' | '=' | '@' | '#' | '`' | '?' )
-    | arrow_operator
-    | {SwiftSupport.isPrefixOp(_input)}? '&'
-    | {SwiftSupport.isPostfixOp(_input)}? '!'
-    ;
+// any_punctuation_for_balanced_token :
+//     ( '.' | ',' | ':' | ';' | '=' | '@' | '#' | '`' | '?' )
+//     | arrow_operator
+//     | {SwiftSupport.isPrefixOp(_input)}? '&'
+//     | {SwiftSupport.isPostfixOp(_input)}? '!'
+//     ;
 
 // Expressions
 
@@ -489,14 +489,14 @@ conditional_operator : '?' /*try_operator?*/ expression ':' ;
 // GRAMMAR OF A PRIMARY EXPRESSION
 
 primary_expression
- : declaration_identifier generic_argument_clause?
+ : declaration_identifier /*generic_argument_clause?*/
  | literal_expression
- | self_expression
+//  | self_expression
 //  | superclass_expression
 //  | closure_expression
  | parenthesized_expression
 //  | tuple_expression
- | implicit_member_expression
+//  | implicit_member_expression
 //  | wildcard_expression
 //  | selector_expression
 //  | key_path_expression
@@ -524,40 +524,40 @@ array_literal_item : expression ;
  
 // GRAMMAR OF A SELF EXPRESSION
 
-self_expression
- : 'self'
- | 'self' '.' declaration_identifier
- | 'self' '[' expression_list ']'
- | 'self' '.' 'init'
+// self_expression
+//  : 'self'
+//  | 'self' '.' declaration_identifier
+//  | 'self' '[' expression_list ']'
+//  | 'self' '.' 'init'
  
- // From ParseExpr.cpp. self and Self parsed with same code:
- //
- //  case tok::kw_self:     // self
- //  case tok::kw_Self:     // Self
- //    Result = makeParserResult(parseExprIdentifier());
- //
- // However, later something happens and Self[1], Self
- //
- // Example code from SetAlgebra.swift:
- //
- // public var isEmpty: Bool {
- //   return self == Self()
- // }
- //
- // Also a valid code:
- //
- // return self == Self() && self == Self.init() && Self.Other() == Self.Other()
- //
- // So this is undocumented:
- //
- | 'Self' // Self()
- | 'Self' '.' declaration_identifier // Self.This()
- | 'Self' '.' 'init' // Self.init()
- ;
+//  // From ParseExpr.cpp. self and Self parsed with same code:
+//  //
+//  //  case tok::kw_self:     // self
+//  //  case tok::kw_Self:     // Self
+//  //    Result = makeParserResult(parseExprIdentifier());
+//  //
+//  // However, later something happens and Self[1], Self
+//  //
+//  // Example code from SetAlgebra.swift:
+//  //
+//  // public var isEmpty: Bool {
+//  //   return self == Self()
+//  // }
+//  //
+//  // Also a valid code:
+//  //
+//  // return self == Self() && self == Self.init() && Self.Other() == Self.Other()
+//  //
+//  // So this is undocumented:
+//  //
+//  | 'Self' // Self()
+//  | 'Self' '.' declaration_identifier // Self.This()
+//  | 'Self' '.' 'init' // Self.init()
+//  ;
 
 // GRAMMAR OF A IMPLICIT MEMBER EXPRESSION
 
-implicit_member_expression : '.' label_identifier ; // let a: MyType = .default; static let `default` = MyType()
+// implicit_member_expression : '.' label_identifier ; // let a: MyType = .default; static let `default` = MyType()
 
 // GRAMMAR OF A PARENTHESIZED EXPRESSION
 
@@ -574,7 +574,7 @@ postfix_expression /* **********************************************************
  | postfix_expression '.' 'init'                                       # initializer_expression
  | postfix_expression '.' 'init' '(' argument_names ')'                # initializer_expression_with_args
  | postfix_expression '.' Pure_decimal_digits                          # explicit_member_expression1
- | postfix_expression '.' declaration_identifier generic_argument_clause?          # explicit_member_expression2
+ | postfix_expression '.' declaration_identifier /*generic_argument_clause?*/          # explicit_member_expression2
  | postfix_expression '.' declaration_identifier '(' argument_names ')'            # explicit_member_expression3
 // This does't exist in the swift grammar, but this valid swift statement fails without it
 // self.addTarget(self, action: #selector(nameOfAction(_:)))
@@ -634,24 +634,24 @@ type
 //  | type '.' 'Type'            #the_metatype_type_type
 //  | type '.' 'Protocol'        #the_metatype_protocol_type
 //  | 'Any'                      #the_any_type
- | 'Self'                     #the_self_type
+//  | 'Self'                     #the_self_type
  ;
 
 // GRAMMAR OF A TYPE ANNOTATION
 
-type_annotation : ':' attributes? 'inout'? type  ;
+type_annotation : ':' /*attributes?*/ 'inout'? type  ;
 
 // GRAMMAR OF A TYPE IDENTIFIER
 
-type_identifier : type_name generic_argument_clause? ('.' type_identifier)? ;
+type_identifier : type_name /*generic_argument_clause?*/ ('.' type_identifier)? ;
 
 type_name : declaration_identifier ;
 
 // GRAMMAR OF A FUNCTION TYPE
 
 function_type
- : attributes? function_type_argument_clause 'throws'? arrow_operator type
- | attributes? function_type_argument_clause 'rethrows' arrow_operator type
+ : /*attributes?*/ function_type_argument_clause 'throws'? arrow_operator type
+ | /*attributes?*/ function_type_argument_clause 'rethrows' arrow_operator type
  ;
  
 function_type_argument_clause
@@ -665,7 +665,7 @@ function_type_argument_list
  ;
  
 function_type_argument
- : attributes? 'inout'? type
+ : /*attributes?*/ 'inout'? type
  | argument_label type_annotation
  ;
 
