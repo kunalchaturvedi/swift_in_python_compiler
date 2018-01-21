@@ -47,7 +47,7 @@ locals [
 loop_statement : for_statement
 //  | for_in_statement
  | while_statement
-//  | repeat_while_statement
+ | repeat_while_statement
  ;
 
 // GRAMMAR OF A FOR STATEMENT
@@ -84,12 +84,12 @@ optional_binding_condition
 
 // GRAMMAR OF A REPEAT-WHILE STATEMENT
 
-// repeat_while_statement : 'repeat' code_block 'while' expression ;
+repeat_while_statement : 'repeat' code_block 'while' expression ;
 
 // GRAMMAR OF A BRANCH STATEMENT
 
 branch_statement : if_statement
-//  | switch_statement
+ | switch_statement
  ;
 
 // GRAMMAR OF AN IF STATEMENT
@@ -102,14 +102,14 @@ else_clause : 'else' code_block | 'else' if_statement  ;
 
 // GRAMMAR OF A SWITCH STATEMENT
 
-// switch_statement : 'switch' expression '{' switch_cases? '}'  ;
-// switch_cases : switch_case switch_cases? ;
-// switch_case : case_label statements | default_label statements  ;
-// case_label : 'case' case_item_list ':' ;
-// case_item_list : pattern where_clause? | pattern where_clause? ',' case_item_list  ;
-// default_label : 'default' ':' ;
-// where_clause : 'where' where_expression ;
-// where_expression : expression ;
+switch_statement : 'switch' expression '{' switch_cases? '}'  ;
+switch_cases : switch_case switch_cases? ;
+switch_case : case_label statements | default_label statements  ;
+case_label : 'case' case_item_list ':' ;
+case_item_list : pattern where_clause? | pattern where_clause? ',' case_item_list  ;
+default_label : 'default' ':' ;
+where_clause : 'where' where_expression ;
+where_expression : expression ;
 
 // GRAMMAR OF A LABELED STATEMENT
 
