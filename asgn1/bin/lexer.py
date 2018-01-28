@@ -22,11 +22,11 @@ keywords = (  'associatedtype', 'class', 'deinit' , 'enum', 'extension' , 'filep
 
 # literals = '()+-*/=?:,.^|&~!=[]{};<>@%'
 
-tokens = [ # 'NAME', 'LINE_COMMENT', 'BLOCK_COMMENT','ESCAPE_CHAR' , 'STRING_LITERAL', 'NUMBER' , 'BOOL','NUMERIC_LITERAL', 
+tokens = [ # 'NAME', 'LINE_COMMENT', 'BLOCK_COMMENT','ESCAPE_CHAR' , 'STRING_LITERAL', 'NUMBER' , 'BOOL','NUMERIC_LITERAL'
         #operator
         'RIGHT_ASSIGN','LEFT_ASSIGN','ADD_ASSIGN','SUB_ASSIGN','MUL_ASSIGN','DIV_ASSIGN',
         'MOD_ASSIGN','AND_ASSIGN','XOR_ASSIGN','OR_ASSIGN','RIGHT_OP','LEFT_OP','INC_OP','DEC_OP',
-        'AND_OP','OR_OP','LE_OP','GE_OP','EQ_OP','NE_OP',
+        'AND_OP','OR_OP','LE_OP','GE_OP','EQ_OP','NE_OP','FUNC_RETURN',
         #literal
         'STRING_LITERAL','CCONST','CONSTANT','NAME'] + [k.upper() for k in keywords]
 
@@ -84,6 +84,8 @@ t_LE_OP = r'<='
 t_GE_OP = r'>='
 t_EQ_OP = r'=='
 t_NE_OP = r'!='
+
+t_FUNC_RETURN = r'->'
 
 t_ignore = " \t\v\f"
 
