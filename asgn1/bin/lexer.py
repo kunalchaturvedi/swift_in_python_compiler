@@ -10,7 +10,7 @@ keywords = (  'associatedtype', 'class', 'deinit' , 'enum', 'extension' , 'filep
 	'else', 'fallthrough', 'for', 'guard', 'if', 'in', 'repeat', 'return', 'switch',
 	'where', 'while',
 	'as', 'Any', 'catch', 'false', 'is', 'nil', 'rethrows', 'super',  'Self', 
-	'throw', 'throws', 'true', 'try', 'print',
+	'throw', 'throws', 'true', 'try', 'print','Int','Float','Double',
 	'_',
 	# '#available', '#colorLiteral', '#column', '#else', 
 	# '#elseif', '#endif', '#file', '#fileLiteral', '#function', '#if', '#imageLiteral',
@@ -28,7 +28,7 @@ tokens = [ # 'NAME', 'LINE_COMMENT', 'BLOCK_COMMENT','ESCAPE_CHAR' , 'STRING_LIT
         'MOD_ASSIGN','AND_ASSIGN','XOR_ASSIGN','OR_ASSIGN','RIGHT_OP','LEFT_OP','INC_OP','DEC_OP',
         'AND_OP','OR_OP','LE_OP','GE_OP','EQ_OP','NE_OP','FUNC_RETURN',
         #literal
-        'STRING_LITERAL','CCONST','CONSTANT','NAME'] + [k.upper() for k in keywords]
+        'STRING_LITERAL','CCONST','NUMBER','NAME'] + [k.upper() for k in keywords]
 
 
 # def t_IDENTIFIER(t):
@@ -51,7 +51,7 @@ def t_CCONST(t):
     r'(L)?\'([^\\\n]|(\\.))*?\''
     return t
 
-def t_CONSTANT(t):
+def t_NUMBER(t):
     r'\.?[0-9][0-9eE_lLdDa-fA-F.xXpP]*'
     return t
 
