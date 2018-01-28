@@ -4,6 +4,6 @@ This is a lexer for swift language. The files have ".swift" extension. This is m
 
 ## How to build
 
-"make"  - to build the lexer executable
+dont need to specifically use makefile. instead just use:
 
-"bin/lexer test/test1.swift"  - to run test case 1
+"python bin/lexer.py test/test1.swift"  - to run test case 1

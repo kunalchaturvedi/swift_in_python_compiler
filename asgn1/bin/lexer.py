@@ -1,4 +1,5 @@
 import sys
+import os
 import ply.lex as lex
 
 # List of token names.   This is always required
@@ -102,10 +103,12 @@ def t_error(t):
 
 lexer = lex.lex()
 
-filename=sys.argv[1]
-inp_file = open(filename,"r")
 
+relpath=sys.argv[1]
+currdir=os.getcwd()
+inp_file = open(currdir + "/bin/" + relpath, "r")
 data = inp_file.read() 
+
 
 lexer.input(data)
 
