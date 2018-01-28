@@ -56,26 +56,10 @@ def t_NUMBER(t):
     return t
 
 
-literals = ['(',')','+','-','*','/','=','?',':',',','.','^','|','&','~','!','=','[',']','{','}',';','<','>','@','%']
+literals = '()+-*/=?:,.^|&~!=[]{};<>@%'
 
 # t_NUM = r'\.?[0-9][0-9eE_lLdDa-fA-F.xXpP]*'
 # t_NUM = r'\.?[0-9][0-9eE_lLdDa-fA-F.xXpP]*'
-# t_PLUS    = r'\+'
-# t_MINUS   = r'-'
-# t_TIMES   = r'\*'
-# t_DIVIDE  = r'/'
-# t_MOD     = r'%'
-# t_AMPERS  = r'&'
-# t_OR = r'\|'
-# t_LPAREN  = r'\('
-# t_RPAREN  = r'\)'
-# t_EQUAL   = r'='
-# t_QUESTION = '?'
-# t_SEMICOLON = ';'
-# t_COLON = ':'
-# t_NOT = '~'
-
-
 
 t_RIGHT_ASSIGN = r'>>='
 t_LEFT_ASSIGN = r'<<='
@@ -114,11 +98,9 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
-ERROR_LIST=[]
 
 def t_error(t):
-    # print("Illegal character '%s'" % t.value[0])
-    ERROR_LIST.append(t.value[0])
+    print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
 
 lexer = lex.lex()
@@ -126,36 +108,14 @@ lexer = lex.lex()
 
 relpath=sys.argv[1]
 currdir=os.getcwd()
-inp_file = open(currdir + "/" + relpath, "r")
+inp_file = open(currdir + "/bin/" + relpath, "r")
 data = inp_file.read() 
 
 
 lexer.input(data)
 
-Toks={}
-for a in tokens+literals:
-    Toks[a]=[a,0]
-
-print "Tokens \t\t Occurances\t\tLexemes"
-for tok in lexer:
-    Toks[tok.type][1]=Toks[tok.type][1]+1
-    if tok.value in Toks[tok.type][2:]: continue
-    Toks[tok.type].append(tok.value)
-
-for x in Toks:
-    if Toks[x][1]!=0 :
-        print "-"*64
-        print Toks[x][0],"\n\t\t\t",Toks[x][1],"\t\t",Toks[x][2]
-        for i in range(3,len(Toks[x])):
-            print "\t\t\t\t\t",Toks[x][i]
-print "-"*64,'\nIllegal list'
-for i in range(0,len(ERROR_LIST)):
-    print ERROR_LIST[i]+"\t",
-print "\n","-"*64
-
-
-# while True:
-#    tok = lexer.token()
-#    if not tok: 
-#        break      # No more input
-#    print(tok)
+while True:
+    tok = lexer.token()
+    if not tok: 
+        break      # No more input
+    print(tok)

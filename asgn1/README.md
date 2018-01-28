@@ -6,4 +6,4 @@ This is a lexer for swift language. The files have ".swift" extension. This is m
 
 dont need to specifically use makefile. instead just use:
 
-"python bin/lexer.py test/test1.swift"  - to run test case 1
+"python bin/lexer.py bin/test/test1.swift"  - to run test case 1
