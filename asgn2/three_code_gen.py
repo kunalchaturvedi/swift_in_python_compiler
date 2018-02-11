@@ -1,7 +1,11 @@
 #!/usr/bin/python
 import sys
 from symtab import *
+<<<<<<< HEAD
 symbol_tab = symbol_table()
+=======
+# symbol_tab = symbol_table()
+>>>>>>> fc857b6879028637f19f7fb843a7ed3907efc42c
 fname = 'A.txt'
 count_label = 0
 count_temp = 0
@@ -10,7 +14,11 @@ offset = 0
 non_vars = ['label', 'call']
 # keywords = ['ifgoto', 'goto', 'ret', 'print', 'function', 'exit'] + non_vars
 addr_desc = {} 
+<<<<<<< HEAD
 
+=======
+varlist = []
+>>>>>>> fc857b6879028637f19f7fb843a7ed3907efc42c
 
 # Variables
 basic_blocks = [] # The list of blocks
@@ -132,7 +140,11 @@ def leader_block_func(lines):
 	leader_block.append(1)   # for first line of execution by default
 	for line in lines:
 		if line[1] == 'call':
+<<<<<<< HEAD
 			leader_block.append(int(line[0])+1)
+=======
+			leader_block.append(int(line[0]))
+>>>>>>> fc857b6879028637f19f7fb843a7ed3907efc42c
 		elif line[1] == 'ifgoto':
 			leader_block.append(int(line[-1]))
 			leader_block.append(int(line[0])+1)
@@ -140,9 +152,16 @@ def leader_block_func(lines):
 			leader_block.append(int(line[0]))
 		elif line[1] == 'goto':
 			leader_block.append(int(line[-1]))
+<<<<<<< HEAD
 		# elif line[1] == 'ret':
 		# 	leader_block.append(int(line[0]))
 	leader=sorted(leader_block)
+=======
+			leader_block.append(int(line[0])+1)
+		# elif line[1] == 'ret':
+		# 	leader_block.append(int(line[0]))
+	leader=sorted(list(set(leader_block)))
+>>>>>>> fc857b6879028637f19f7fb843a7ed3907efc42c
 	return leader
 
 def Basic_block(lines,leader_block):
@@ -213,6 +232,7 @@ def content(block):
 	return (block_var_set, block_var_list_by_line)		
 
 
+<<<<<<< HEAD
 def process(block):
 	(block_var_set, block_var_list_by_line) = content(block)
 	src=['$']
@@ -230,6 +250,40 @@ def process(block):
 	else :
 		for line in reversed(block):
 			idx= block.index(line)
+=======
+
+def var_List(code):
+	varlist=[]
+	leader_block = leader_block_func(code)
+	basic_blocks = Basic_block(code,leader_block)
+	for block in basic_blocks:
+		(block_var_set, block_var_list_by_line) = content(block)
+		varlist=varlist+block_var_set
+	return list(set(varlist))
+
+
+def process(block,nextuseTable):
+	(block_var_set, block_var_list_by_line) = content(block)
+	symbol_table={}
+	symbol_table_list=[]
+	num_var=len(block_var_set)
+	for var in block_var_set:
+		if var not in addr_desc:
+			addr_desc[var] = {'loc': 'mem', 'reg_val': None}
+			# for var1 in block_var_set
+	for var1 in block_var_set:
+		symbol_table[var1] = {'state': 'dead', 'prev_use': None, 'next_use': None}
+	if not symbol_table:
+		for line in block:
+	        symbol_table_list.append({})
+	else:
+		for line in reversed(block):
+			# nextuseTable[instrnumber-1] = {var:symbolTable[var] for var in block_var_set}
+			src=['$']
+			dst=['$']
+			idx= block.index(line)
+			nextuseTable[instrnumber-1] = {var:symbolTable[var] for var in block_var_set}
+>>>>>>> fc857b6879028637f19f7fb843a7ed3907efc42c
 			if not block_var_list_by_line[idx]:
 				symbol_table_list.insert(0, {})
 				continue
@@ -238,6 +292,7 @@ def process(block):
 				symbol_table[dest]['state'] = 'dead'
 			for i in range(1, len(block_var_list_by_line[idx])):
 				src=[(block_var_list_by_line[idx][i])]+src
+<<<<<<< HEAD
 			if src[0] == '$':
 				if symbol_table[src]['state'] == 'dead':
 					symbol_table[src]['state'] = 'live'
@@ -261,3 +316,84 @@ def main():
 	# traverse_tree(root, None,None)
 	print code
 	return root, symbol_table
+=======
+			source_len=len(src)
+			operator = line[1]
+			variable = block_var_list_by_line[idx]
+			if operator in arith_ops:
+				z = line[2]
+				x = line[3]
+				y = line[4]
+				if z in variable:
+					symbol_table[z] = ["dead", None]
+				if x in variable:
+					symbol_table[x] = ["live", idx]
+				if y in variables:
+					symbol_table[y] = ["live", idx]
+			elif operator == "ifgoto":
+				x = line[3]
+				y = line[4]
+				if x in variable:
+					symbol_table[x] = ["live", idx]
+				if y in variable:
+					symbol_table[y] = ["live", idx]
+			elif operator == "print":
+				x = line[2]
+				if x in variable:
+					symbol_table[x] = ["live", idx]
+			elif operator == "="
+				x = line[2]	
+				y = line[3]
+				if x in variable:
+					symbol_table[x] = ["dead", None]
+				if y in variables:
+					symbol_table[y] = ["live", idx]
+	return symbol_table,nextuseTable			
+
+
+
+
+
+
+		# i=0
+		# while src[i] != '$':
+# 			if symbol_table[src[0]]['state'] == 'dead':
+# 				symbol_table[src[0]]['state'] = 'live'
+# 				symbol_table[src[0]]['prev_use'] = idx
+# 				symbol_table[src[0]]['next_use'] = idx
+# 			i=i+1
+# 		symbol_table_list.insert(0, symbol_table)
+# return symbol_table,symbol_table_list
+
+def main():
+# global symbol_table, root,code
+# with open(fname) as f:
+#   content = f.readlines()
+# symbolTable = addressDescriptor.fromkeys(varlist, ["live", None])
+lines = [[line.rstrip('\n').replace(" ", "").split(',')][0] for line in open(fname)]
+No_lines=len(lines) #lines, operation, dest, source
+leader_block = leader_block_func(lines)
+basic_blocks = Basic_block(lines,leader_block)
+nextuseTable = [None for i in range(len(lines))]
+varlist=var_List(lines)
+for block in basic_blocks:
+	print process(block,nextuseTable)[0],"\n",process(block,nextuseTable)[1]
+	print '\n\n\n\n\n\n\n'
+
+
+# Generating the x86 Assembly code
+#--------------------------------------------------------------------------------------------------
+data_section = ".section .data\n"
+for var in varlist:
+	data_section = data_section + var + ":\n" + ".int 0\n"
+data_section = data_section + "str:\n.ascii \"%d\\n\\0\"\n"
+
+bss_section = ".section .bss\n"
+text_section = ".section .text\n" + ".globl main\n" + "main:\n"
+
+x86c = data_section + bss_section + text_section
+print(x86c) 
+	# traverse_tree(root, None,None)
+	# print code
+	# return root, symbol_table
+>>>>>>> fc857b6879028637f19f7fb843a7ed3907efc42c
