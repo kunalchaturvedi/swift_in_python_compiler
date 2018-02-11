@@ -24,7 +24,7 @@ def translate(t_line):
 		#################addition case###############
 		if t_op == "+":
 			if not isnumber(operand1) and not isnumber(operand2):
-				destreg=getReg(result,t_line) # replace ,t_line with t_line_no everywhere
+				destreg=getReg(result,t_line_no) # replace ,t_line with t_line_no everywhere
 				loc1=getLocation(operand1)
 				loc2=getLocation(operand2)
 				if loc1 == 'mem' and loc2 == 'mem' :
@@ -41,11 +41,11 @@ def translate(t_line):
 					asm_line=asm_line + "add " + loc1 + ", " + destreg + "\n"
 			
 			elif isnumber(operand1) and isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				asm_line = asm_line + "mov $" + str(int(operand1)+int(operand2)) + ", " + destreg + "\n"
 			
 			elif not isnumber(operand1) and isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				asm_line = asm_line + "mov $" +operand2 + ", " + destreg + "\n"
 				if loc1 == 'mem':
@@ -54,7 +54,7 @@ def translate(t_line):
 					asm_line = asm_line + "add " + loc1 + ", " + destreg + "\n"
 			
 			elif isnumber(operand1) and not isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand2)
 				asm_line = asm_line + "mov $" +operand1 + ", " + destreg + "\n"
 				if loc1 == 'mem':
@@ -68,7 +68,7 @@ def translate(t_line):
 		######subtraction case#################3
 		elif t_op == "-":
 			if not isnumber(operand1) and not isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				loc2=getLocation(operand2)
 				if loc1 == 'mem' and loc2 == 'mem' :
@@ -85,11 +85,11 @@ def translate(t_line):
 					asm_line=asm_line + "sub " + loc1 + ", " + destreg + "\n"
 			
 			elif isnumber(operand1) and isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				asm_line = asm_line + "mov $" + str(int(operand2)-int(operand1)) + ", " + destreg + "\n"
 			
 			elif not isnumber(operand1) and isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				asm_line = asm_line + "mov $" +operand2 + ", " + destreg + "\n"
 				if loc1 == 'mem':
@@ -98,7 +98,7 @@ def translate(t_line):
 					asm_line = asm_line + "sub " + loc1 + ", " + destreg + "\n"
 			
 			elif isnumber(operand1) and not isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand2)
 				asm_line = asm_line + "mov $" +operand1 + ", " + destreg + "\n"
 				if loc1 == 'mem':
@@ -268,12 +268,12 @@ def translate(t_line):
 			LESS="LESS" + str(opnumber)
 			NLESS="NLESS" +str(opnumber)
 			if isnumber(operand1) and isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				asm_line=asm_line +"move $"+str(int(int(operand1)<=int(operand2)))+", " +destreg + "\n"
 				setReg(destreg,result)
 				setLocation(result,destreg)
 			elif isnumber(operand1) and not isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc2=getLocation(operand2)
 				asm_line=asm_line +"move $"+operand1+", " +destreg + "\n"
 				if loc2 !='mem':
@@ -289,7 +289,7 @@ def translate(t_line):
 				setReg(destreg,result)
 				setLocation(result,destreg)
 			elif not isnumber(operand1) and isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				asm_line=asm_line +"move $"+operand2+", " +destreg + "\n"
 				if loc2 !='mem':
@@ -306,7 +306,7 @@ def translate(t_line):
 				setReg(destreg,result)
 				setLocation(result,destreg)		
 			elif not isnumber(operand1) and not isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				loc2=getLocation(operand2)
 					
@@ -340,12 +340,12 @@ def translate(t_line):
 			LESS="LESS" + str(opnumber)
 			NLESS="NLESS" +str(opnumber)
 			if isnumber(operand1) and isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				asm_line=asm_line +"move $"+str(int(int(operand1)>=int(operand2)))+", " +destreg + "\n"
 				setReg(destreg,result)
 				setLocation(result,destreg)
 			elif isnumber(operand1) and not isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc2=getLocation(operand2)
 				asm_line=asm_line +"move $"+operand1+", " +destreg + "\n"
 				if loc2 !='mem':
@@ -361,7 +361,7 @@ def translate(t_line):
 				setReg(destreg,result)
 				setLocation(result,destreg)
 			elif not isnumber(operand1) and isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				asm_line=asm_line +"move $"+operand2+", " +destreg + "\n"
 				if loc2 !='mem':
@@ -378,7 +378,7 @@ def translate(t_line):
 				setReg(destreg,result)
 				setLocation(result,destreg)		
 			elif not isnumber(operand1) and not isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				loc2=getLocation(operand2)
 					
@@ -412,12 +412,12 @@ def translate(t_line):
 			LESS="LESS" + str(opnumber)
 			NLESS="NLESS" +str(opnumber)
 			if isnumber(operand1) and isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				asm_line=asm_line +"move $"+str(int(int(operand1)==int(operand2)))+", " +destreg + "\n"
 				setReg(destreg,result)
 				setLocation(result,destreg)
 			elif isnumber(operand1) and not isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc2=getLocation(operand2)
 				asm_line=asm_line +"move $"+operand1+", " +destreg + "\n"
 				if loc2 !='mem':
@@ -433,7 +433,7 @@ def translate(t_line):
 				setReg(destreg,result)
 				setLocation(result,destreg)
 			elif not isnumber(operand1) and isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				asm_line=asm_line +"move $"+operand2+", " +destreg + "\n"
 				if loc2 !='mem':
@@ -450,7 +450,7 @@ def translate(t_line):
 				setReg(destreg,result)
 				setLocation(result,destreg)		
 			elif not isnumber(operand1) and not isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				loc2=getLocation(operand2)
 					
@@ -484,12 +484,12 @@ def translate(t_line):
 			LESS="LESS" + str(opnumber)
 			NLESS="NLESS" +str(opnumber)
 			if isnumber(operand1) and isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				asm_line=asm_line +"move $"+str(int(int(operand1)!=int(operand2)))+", " +destreg + "\n"
 				setReg(destreg,result)
 				setLocation(result,destreg)
 			elif isnumber(operand1) and not isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc2=getLocation(operand2)
 				asm_line=asm_line +"move $"+operand1+", " +destreg + "\n"
 				if loc2 !='mem':
@@ -505,7 +505,7 @@ def translate(t_line):
 				setReg(destreg,result)
 				setLocation(result,destreg)
 			elif not isnumber(operand1) and isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				asm_line=asm_line +"move $"+operand2+", " +destreg + "\n"
 				if loc2 !='mem':
@@ -522,7 +522,7 @@ def translate(t_line):
 				setReg(destreg,result)
 				setLocation(result,destreg)		
 			elif not isnumber(operand1) and not isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				loc2=getLocation(operand2)
 					
@@ -556,12 +556,12 @@ def translate(t_line):
 			LESS="LESS" + str(opnumber)
 			NLESS="NLESS" +str(opnumber)
 			if isnumber(operand1) and isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				asm_line=asm_line +"move $"+str(int(int(operand1)<int(operand2)))+", " +destreg + "\n"
 				setReg(destreg,result)
 				setLocation(result,destreg)
 			elif isnumber(operand1) and not isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc2=getLocation(operand2)
 				asm_line=asm_line +"move $"+operand1+", " +destreg + "\n"
 				if loc2 !='mem':
@@ -577,7 +577,7 @@ def translate(t_line):
 				setReg(destreg,result)
 				setLocation(result,destreg)
 			elif not isnumber(operand1) and isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				asm_line=asm_line +"move $"+operand2+", " +destreg + "\n"
 				if loc2 !='mem':
@@ -594,7 +594,7 @@ def translate(t_line):
 				setReg(destreg,result)
 				setLocation(result,destreg)		
 			elif not isnumber(operand1) and not isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				loc2=getLocation(operand2)
 					
@@ -628,12 +628,12 @@ def translate(t_line):
 			LESS="LESS" + str(opnumber)
 			NLESS="NLESS" +str(opnumber)
 			if isnumber(operand1) and isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				asm_line=asm_line +"move $"+str(int(int(operand1)>int(operand2)))+", " +destreg + "\n"
 				setReg(destreg,result)
 				setLocation(result,destreg)
 			elif isnumber(operand1) and not isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc2=getLocation(operand2)
 				asm_line=asm_line +"move $"+operand1+", " +destreg + "\n"
 				if loc2 !='mem':
@@ -649,7 +649,7 @@ def translate(t_line):
 				setReg(destreg,result)
 				setLocation(result,destreg)
 			elif not isnumber(operand1) and isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				asm_line=asm_line +"move $"+operand2+", " +destreg + "\n"
 				if loc2 !='mem':
@@ -666,7 +666,7 @@ def translate(t_line):
 				setReg(destreg,result)
 				setLocation(result,destreg)		
 			elif not isnumber(operand1) and not isnumber(operand2):
-				destreg=getreg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				loc2=getLocation(operand2)
 					
@@ -697,7 +697,7 @@ def translate(t_line):
 			operand1=t_line[3]
 			operand2=t_line[4]
 			if not isnumber(operand1) and not isnumber(operand2):
-				destreg=getReg(result,t_line) # replace ,t_line with t_line_no everywhere
+				destreg=getReg(result,t_line_no) # replace ,t_line with t_line_no everywhere
 				loc1=getLocation(operand1)
 				loc2=getLocation(operand2)
 				if loc1 == 'mem' and loc2 == 'mem' :
@@ -714,11 +714,11 @@ def translate(t_line):
 					asm_line=asm_line + "and " + loc1 + ", " + destreg + "\n"
 			
 			elif isnumber(operand1) and isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				asm_line = asm_line + "mov $" + str(int(operand1) and int(operand2)) + ", " + destreg + "\n"
 			
 			elif not isnumber(operand1) and isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				asm_line = asm_line + "mov $" +operand2 + ", " + destreg + "\n"
 				if loc1 == 'mem':
@@ -727,7 +727,7 @@ def translate(t_line):
 					asm_line = asm_line + "and " + loc1 + ", " + destreg + "\n"
 			
 			elif isnumber(operand1) and not isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc2=getLocation(operand2)
 				asm_line = asm_line + "mov $" +operand1 + ", " + destreg + "\n"
 				if loc1 == 'mem':
@@ -743,7 +743,7 @@ def translate(t_line):
 			operand1=t_line[3]
 			operand2=t_line[4]
 			if not isnumber(operand1) and not isnumber(operand2):
-				destreg=getReg(result,t_line) # replace ,t_line with t_line_no everywhere
+				destreg=getReg(result,t_line_no) # replace ,t_line with t_line_no everywhere
 				loc1=getLocation(operand1)
 				loc2=getLocation(operand2)
 				if loc1 == 'mem' and loc2 == 'mem' :
@@ -760,11 +760,11 @@ def translate(t_line):
 					asm_line=asm_line + "or " + loc1 + ", " + destreg + "\n"
 			
 			elif isnumber(operand1) and isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				asm_line = asm_line + "mov $" + str(int(operand1) or int(operand2)) + ", " + destreg + "\n"
 			
 			elif not isnumber(operand1) and isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				asm_line = asm_line + "mov $" +operand2 + ", " + destreg + "\n"
 				if loc1 == 'mem':
@@ -773,7 +773,7 @@ def translate(t_line):
 					asm_line = asm_line + "and " + loc1 + ", " + destreg + "\n"
 			
 			elif isnumber(operand1) and not isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc2=getLocation(operand2)
 				asm_line = asm_line + "mov $" +operand1 + ", " + destreg + "\n"
 				if loc1 == 'mem':
@@ -789,7 +789,7 @@ def translate(t_line):
 			operand1=t_line[3]
 			operand2=t_line[4]
 			if not isnumber(operand1) and not isnumber(operand2):
-				destreg=getReg(result,t_line) # replace ,t_line with t_line_no everywhere
+				destreg=getReg(result,t_line_no) # replace ,t_line with t_line_no everywhere
 				loc1=getLocation(operand1)
 				loc2=getLocation(operand2)
 				if loc1 == 'mem' and loc2 == 'mem' :
@@ -806,11 +806,11 @@ def translate(t_line):
 					asm_line=asm_line + "shl " + loc1 + ", " + destreg + "\n"
 			
 			elif isnumber(operand1) and isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				asm_line = asm_line + "mov $" + str(int(operand1)<<int(operand2)) + ", " + destreg + "\n"
 			
 			elif not isnumber(operand1) and isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				asm_line = asm_line + "mov $" +operand2 + ", " + destreg + "\n"
 				if loc1 == 'mem':
@@ -819,7 +819,7 @@ def translate(t_line):
 					asm_line = asm_line + "shl " + loc1 + ", " + destreg + "\n"
 			
 			elif isnumber(operand1) and not isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc2=getLocation(operand2)
 				asm_line = asm_line + "mov $" +operand1 + ", " + destreg + "\n"
 				if loc1 == 'mem':
@@ -835,7 +835,7 @@ def translate(t_line):
 			operand1=t_line[3]
 			operand2=t_line[4]
 			if not isnumber(operand1) and not isnumber(operand2):
-				destreg=getReg(result,t_line) # replace ,t_line with t_line_no everywhere
+				destreg=getReg(result,t_line_no) # replace ,t_line with t_line_no everywhere
 				loc1=getLocation(operand1)
 				loc2=getLocation(operand2)
 				if loc1 == 'mem' and loc2 == 'mem' :
@@ -852,11 +852,11 @@ def translate(t_line):
 					asm_line=asm_line + "shr " + loc1 + ", " + destreg + "\n"
 			
 			elif isnumber(operand1) and isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				asm_line = asm_line + "mov $" + str(int(operand1)>>int(operand2)) + ", " + destreg + "\n"
 			
 			elif not isnumber(operand1) and isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)
 				asm_line = asm_line + "mov $" +operand2 + ", " + destreg + "\n"
 				if loc1 == 'mem':
@@ -865,7 +865,7 @@ def translate(t_line):
 					asm_line = asm_line + "shr " + loc1 + ", " + destreg + "\n"
 			
 			elif isnumber(operand1) and not isnumber(operand2):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc2=getLocation(operand2)
 				asm_line = asm_line + "mov $" +operand1 + ", " + destreg + "\n"
 				if loc1 == 'mem':
@@ -880,7 +880,7 @@ def translate(t_line):
 			result=t_line[2]
 			operand1=t_line[3]
 			if not isnumber(operand1):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				loc1=getLocation(operand1)	
 				if loc1 != "mem" :
 					asm_line=asm_line +"mov "+loc1+", "+ destreg + "\n"
@@ -890,7 +890,7 @@ def translate(t_line):
 				setReg(destreg,result)
 				setLocation(result,destreg)
 			elif isnumber(operand1):
-				destreg=getReg(result,t_line)
+				destreg=getReg(result,t_line_no)
 				asm_line = asm_line + "mov $" + str(not(int(operand1))) + ", " + destreg + "\n"	
 				setReg(destreg,result)
 				setLocation(result,destreg)
@@ -919,7 +919,7 @@ def translate(t_line):
 			asm_line = asm_line + "mov %ebp, %esp\n"
 			asm_line = asm_line + "pop %ebp\n"
 			asm_line = asm_line + "ret\n"							
-	return asm_line
+return asm_line
 
 
 	
