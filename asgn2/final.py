@@ -181,5 +181,10 @@ for node in nodes:
 		text_section = text_section + str(translate(lines[int(n)-1]))
 		# print "$$$$$$$$$$$$" + str(translate(lines[int(n)-1]))
 
+fout= open("Aout.txt","w")
 
-print text_section
+x86c = data_section + bss_section + text_section
+# print(x86c)
+
+print x86c
+fout.write(x86c)

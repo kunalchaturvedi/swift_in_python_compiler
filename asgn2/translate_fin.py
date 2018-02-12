@@ -270,6 +270,7 @@ def translate(t_line):
 		dest=t_line[2]
 		src=t_line[3]
 		loc1=getLocation(dest)
+		print loc1 + "--------------------------------------"
 		if isnumber(src):
 			if loc1 == "mem":
 				asm_line=asm_line + "mov $" + src + ", " + dest + "\n"
@@ -939,7 +940,7 @@ def translate(t_line):
 	#elif t_op=="pop":
 	#	asm_line=asm_line + "add $4, $esp " +"\n"
 	
-	elif t_op=="return":
+	elif t_op=="@#@#return":
 		val = t_line[2]
 		for var in varlist:
 			loc = getLocation(var)
@@ -1077,27 +1078,38 @@ def translate(t_line):
 		# 		setLocation(var, "mem")
 
 		if relop== "==":
-			asm_line = asm_line + "je" + ifgoto_label + "\n"
+			asm_line = asm_line + "je " + ifgoto_label + "\n"
 		if relop== "<=":
-			asm_line = asm_line + "jle" + ifgoto_label + "\n"
+			asm_line = asm_line + "jle " + ifgoto_label + "\n"
 		if relop== ">=":
-			asm_line = asm_line + "jge" + ifgoto_label + "\n"
+			asm_line = asm_line + "jge " + ifgoto_label + "\n"
 		if relop== "<":
-			asm_line = asm_line + "jl" + ifgoto_label + "\n"
+			asm_line = asm_line + "jl " + ifgoto_label + "\n"
 		if relop== ">":
-			asm_line = asm_line + "jg" + ifgoto_label + "\n"
+			asm_line = asm_line + "jg " + ifgoto_label + "\n"
 		if relop== "!=":
-			asm_line = asm_line + "jne" + ifgoto_label + "\n"
+			asm_line = asm_line + "jne " + ifgoto_label + "\n"
 
-	# # print
-	# 	elif "print":
-	# 		# t_line_no, "print", operand
-	# 		# karna kya hai par???
-	# 		# #####################################????????????????????????
-	# 		if isnumber(operand):
-	# 			# asm_line = asm_line
-	# 			# ????
-	# 		else:
-	# 			# ?????
-	######end of function here########							
+	# print
+	elif t_op =="print":
+		# t_line_no, "print", op
+		# karna kya hai par???
+		# #####################################????????????????????????
+		print len(t_line)
+		op = t_line[2]
+		if isnumber(op):
+			asm_line = asm_line + "push $" + op + "\n"
+			asm_line = asm_line + "push $str" + "\n"
+			asm_line =asm_line + "call printf" + "\n"
+		else:
+			loc = getLocation(op)
+			if loc == "mem":
+				asm_line=asm_line + "push " + op + "\n"
+				asm_line = asm_line + "push $str" +"\n"
+				asm_line =asm_line + "call printf" + "\n"
+			else:
+				asm_line=asm_line + "push " + loc + "\n"
+				asm_line = asm_line + "push $str" +"\n"
+				asm_line =asm_line + "call printf" + "\n"				
+			######end of function here########							
 	return asm_line
