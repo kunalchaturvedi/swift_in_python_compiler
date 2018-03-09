@@ -1,5 +1,3 @@
-import UIKit
-var myString = "Hello, World!"
-print(myString)
-
-print(myString)
+var index = 10.1
+var shit = 122345e22e2
+var asd = 'a'

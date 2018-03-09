@@ -28,7 +28,7 @@ tokens = [ # 'NAME', 'LINE_COMMENT', 'BLOCK_COMMENT','ESCAPE_CHAR' , 'STRING_LIT
         'MOD_ASSIGN','AND_ASSIGN','XOR_ASSIGN','OR_ASSIGN','RIGHT_OP','LEFT_OP','INC_OP','DEC_OP',
         'AND_OP','OR_OP','LE_OP','GE_OP','EQ_OP','NE_OP','FUNC_RETURN',
         #literal
-        'STRING_LITERAL','CCONST','NUMBER','NAME'] + [k.upper() for k in keywords]
+        'STRING_LITERAL','CHAR_CONST','INT_CONST','IDENTIFIER', 'FLOAT_CONST'] + [k.upper() for k in keywords]
 
 
 # def t_IDENTIFIER(t):
@@ -37,7 +37,7 @@ tokens = [ # 'NAME', 'LINE_COMMENT', 'BLOCK_COMMENT','ESCAPE_CHAR' , 'STRING_LIT
 #     return t
 
 
-def t_NAME(t):
+def t_IDENTIFIER(t):
     '[A-Za-z_$][A-Za-z0-9_$]*'
     if t.value in keywords:
         t.type = t.value.upper()
@@ -47,14 +47,35 @@ def t_STRING_LITERAL(t):
     r'\"([^\\\n]|(\\.))*?\"'
     return t
 
-def t_CCONST(t): 
-    r'(L)?\'([^\\\n]|(\\.))*?\''
+def t_CHAR_CONST(t): 
+    r'\'[A-Za-z]\''
     return t
 
-def t_NUMBER(t):
-    r'\.?[0-9][0-9eE_lLdDa-fA-F.xXpP]*'
+
+FLOAT_CONST = r"""
+(?:
+    (?:0|[1-9][0-9]*)\.[0-9]*(?:[eE][+-]?[0-9]+)?
+    |
+    \.[0-9]+(?:[eE][+-]?[0-9]+)?
+)
+"""
+
+@lex.TOKEN(FLOAT_CONST)
+def t_FLOAT_CONST(t):
+    # r'(([0-9](_?[0-9]+)*(\.[0-9](_?[0-9]+)*)?)[eE]\-[0-9](_?[0-9]+)*)|([0-9](_?[0-9]+)*\.[0-9](_?[0-9]+)*)([eE][\+]?[0-9](_?[0-9]+)*)?'
+    # t.value = float(t.value.replace("_",""))
     return t
 
+INT_CONST = r"""
+(?:
+    (?:0|[1-9][0-9]*)(?:[eE][+-]?[0-9]+)?
+)
+"""
+
+@lex.TOKEN(INT_CONST)
+def t_INT_CONST(t):
+    # r'[0-9][0-9A-F]*'
+    return t
 
 literals = ['(',')','+','-','*','/','=','?',':',',','.','^','|','&','~','!','=','[',']','{','}',';','<','>','@','%']
 
