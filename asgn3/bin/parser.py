@@ -9,13 +9,13 @@ import sys
 precedence = (
 	('left', 'OR_ASSIGN')
 	('left', 'XOR_ASSIGN'),
-	('left', AND),
+	('left', 'AND'),
 	('left', 'EQ_OP', 'NE_OP'),
 	('left', 'GT', 'GE', 'LT', 'LE'),
 	('left', 'RSHIFT', 'LSHIFT'),
 	('left', 'ADD_ASSIGN', 'SUB_ASSIGN'),
 	('left', 'MUL_ASSIGN', 'DIV_ASSIGN', 'MOD_ASSIGN'),
-	('right', '~'),
+	('right', 'TILDE'),
 	('left', 'MEMBERACCESS')
 )
 
@@ -51,11 +51,12 @@ def p_loop_statement(p):
 
 def p_for_statement(p):
 	"""
-	for_statement : FOR LPAREN for_init? SEMICOLON expression? SEMICOLON expression? RPAREN code_block
+	for_statement : FOR LPAREN for_init SEMICOLON expression SEMICOLON expression RPAREN code_block
 	"""	
 def p_for_init(p):
 	"""
-	for_init : variable_declaration | expression_list
+	for_init : variable_declaration 
+	| expression_list
 	"""
 
 def p_while(p):
@@ -65,8 +66,14 @@ def p_while(p):
 
 def p_condition_list(p):
 	"""
-	condition_list : condition (COMMA condition)*
+	condition_list : condition commacond
 	"""
+def p_commacond(p):  #*
+	"""
+	commacond : COMMA condition commacond
+	|
+	"""
+
 
 def p_condition(p):
 	"""
@@ -102,27 +109,31 @@ def p_branch_statement(p):
 
 def p_if_statement(p):
 	"""
-	if_statement : IF condition_list code_block else_clause? 
+	if_statement : IF condition_list code_block else_clause 
+	| IF condition_list code_block
 	"""
 def p_else_clause(p):
 	"""
-	else_clause : ELSE code_block | ELSE if_statement
-
+	else_clause : ELSE code_block 
+	| ELSE if_statement
 	"""
 
 def p_switch_statement(p):
 	"""
-	switch_statement : SWITCH expression LCURLY switch_cases? RCURLY
+	switch_statement : SWITCH expression LCURLY switch_cases RCURLY
+	| SWITCH expression LCURLY RCURLY
 	"""
 
 def p_switch_cases(p):
 	"""
-	switch_cases : switch_case switch_cases? 
+	switch_cases : switch_case switch_cases
+	| switch_case 
 	"""
 
 def p_switch_case(p):
 	"""
-	switch_case : case_label statements | default_label statements
+	switch_case : case_label statements 
+	| default_label statements
 	"""
 
 def p_case_label(p):
@@ -132,7 +143,10 @@ def p_case_label(p):
 
 def p_case_item_list(p):
 	"""
-	case_item_list : pattern where_clause? | pattern where_clause? COMMA case_item_list 
+	case_item_list : pattern where_clause
+	| pattern 
+	| pattern where_clause COMMA case_item_list
+	| pattern COMMA case_item_list
 	"""
 
 def p_default_label(p):
@@ -171,7 +185,8 @@ def p_continue_statement():
 
 def p_return_statement(p):
 	"""
-	return_statement : RETURN expression?
+	return_statement : RETURN expression
+	| RETURN
 	"""
 
 
@@ -191,19 +206,22 @@ def p_declaration(p):
 # GRAMMAR OF A TOP-LEVEL DECLARATION
 def p_top_level_declaration(p):
 	"""
-	top_level_declaration : statements? 
+	top_level_declaration : statements
+	| 
 	"""
 
 # GRAMMAR OF A CODE BLOCK
 def code_block(p):
 	"""
-	code_block : LCURLY statements? RCURLY 
+	code_block : LCURLY statements RCURLY
+	| LCURLY RCURLY
 	"""
 
 # GRAMMAR OF AN IMPORT DECLARATION
 def p_import_declaration(p):
 	"""
-	import_declaration : IMPORT import_kind? import_path 
+	import_declaration : IMPORT import_kind import_path
+	| IMPORT import_path
 	"""
 
 def p_import_kind(p):
@@ -220,8 +238,14 @@ def p_import_kind(p):
 
 def p_import_path(p):
 	"""
-	import_path : import_path_identifier (DOT import_path_identifier)*  
+	import_path : import_path_identifier dot_import_path_identifier
 	"""
+def p_dot_import_path_identifier(p): #*
+	"""
+	dot_import_path_identifier : DOT import_path_identifier dot_import_path_identifier
+	|
+	"""
+
 
 def p_import_path_identifier(p):
 	"""
@@ -233,7 +257,8 @@ def p_import_path_identifier(p):
 
 def p_constant_declaration(p):
 	"""
-	constant_declaration : declaration_modifiers? LET pattern_initializer_list
+	constant_declaration : declaration_modifiers LET pattern_initializer_list
+	| LET pattern_initializer_list
 	"""
 
 def p_pattern_initializer_list(p):
@@ -247,7 +272,8 @@ def p_pattern_initializer_list(p):
 #  */
 def p_pattern_initializer(p):
 	"""
-	pattern_initializer : pattern initializer? 
+	pattern_initializer : pattern initializer
+	| pattern
 	"""
 
 def initializer(p):
@@ -270,7 +296,8 @@ def p_variable_declaration(p):
 
 def p_variable_declaration_head(p):
 	"""
-	variable_declaration_head : declaration_modifiers? VAR  
+	variable_declaration_head : declaration_modifiers VAR
+	| VAR    
 	"""
 
 def p_variable_name(p):
@@ -301,7 +328,8 @@ def p_function_declaration(p):
 
 def p_function_head(p):
 	"""
-	function_head : declaration_modifiers? FUNC 
+	function_head : declaration_modifiers FUNC
+	| FUNC
 	"""
 
 def p_function_name(p):
@@ -312,8 +340,12 @@ def p_function_name(p):
 
 def p_function_signature(p):
 	"""
-	function_signature : parameter_clause THROWS? function_result?
-	| parameter_clause RETHROWS function_result?
+	function_signature : parameter_clause THROWS function_result
+	| parameter_clause 
+	| parameter_clause THROWS 
+	| parameter_clause function_result
+	| parameter_clause RETHROWS function_result
+	| parameter_clause RETHROWS
 	
 	"""
 
@@ -335,14 +367,23 @@ def p_parameter_clause(p):
 
 def p_parameter_list(p):
 	"""
-	parameter_list : parameter (COMMA parameter)*  
+	parameter_list : parameter commapar  
 	"""
+def p_commapar(p): #*
+	"""
+	commapar : COMMA parameter commapar
+	|
+	"""
+
 
 def p_parameter(p):
 	"""
-	parameter : external_parameter_name? local_parameter_name type_annotation default_argument_clause?
-	| external_parameter_name? local_parameter_name type_annotation
-	| external_parameter_name? local_parameter_name type_annotation range_operator
+	parameter : external_parameter_name local_parameter_name type_annotation default_argument_clause
+	|  local_parameter_name type_annotation 
+	|  local_parameter_name type_annotation default_argument_clause
+	| external_parameter_name local_parameter_name type_annotation 
+	| external_parameter_name local_parameter_name type_annotation range_operator
+	| local_parameter_name type_annotation range_operator
 	
 	"""
 
@@ -375,8 +416,14 @@ def p_struct_name(p):
 
 def p_struct_body(p):
 	"""
-	struct_body : LCURLY struct_member* RCURLY  
+	struct_body : LCURLY struct_member_star RCURLY  
 	"""
+def p_struct_member_star(p): #*
+	"""
+	struct_member_star : struct_member struct_member_star
+	|
+	"""
+
 
 def p_struct_member(p):
 	"""
@@ -437,7 +484,8 @@ def p_declaration_modifier(p):
 
 def p_pattern(p):
 	"""
-	pattern : identifier_pattern type_annotation?
+	pattern : identifier_pattern type_annotation
+	| identifier_pattern
 	| value_binding_pattern
 	| expression_pattern
 	
@@ -457,13 +505,20 @@ def p_expression_pattern(p):
 
 def p_expression(p):
 	"""
-	expression : prefix_expression binary_expressions? 
+	expression : prefix_expression binary_expressions
+	| prefix_expression
 	"""
 
 def p_expression_list(p):
 	"""
-	expression_list : expression (COMMA expression)* 
+	expression_list : expression commaexp 
 	"""
+def p_commaexp(p): #*
+	"""
+	commaexp : COMMA expression commaexp
+	|
+	"""
+
 
 def p_prefix_expression(p):
 	"""
@@ -486,10 +541,16 @@ def p_binary_expression(p):
 
 def p_binary_expressions(p):
 	"""
-	binary_expressions : binary_expression+ 
+	binary_expressions : binary_expression_plus 
+	"""
+def p_binary_expression_plus(p): #+
+	"""
+	binary_expression_plus : binary_expression binary_expression_plus
+	| binary_expression
 	"""
 
-#wrong---------- exp ? exp : exp -------------------------------------------------------
+
+# correct hai 
 def p_conditional_operator(p):
 	"""
 	conditional_operator : CONDOP expression COLON 
@@ -512,12 +573,14 @@ def p_literal_expression(p):
 
 def p_array_literal(p):
 	"""
-	array_literal : LBRACK array_literal_items? RBRACK 
+	array_literal : LBRACK array_literal_items RBRACK
+	| LBRACK RBRACK 
 	"""
 
 def p_array_literal_items(p):
 	"""
-	array_literal_items : array_literal_item COMMA?
+	array_literal_items : array_literal_item COMMA
+	| array_literal_item
 	| array_literal_item COMMA array_literal_items
 	"""
 
@@ -592,8 +655,14 @@ def p_function_call_argument(p):
  
 def p_arguement_names(p):
 	"""
-	argument_names : argument_name (argument_name)* 
+	argument_names : argument_name argument_name_star 
 	"""
+def p_argument_name_star(p): #*
+	"""
+	argument_name_star : argument_name argument_name_star
+	|
+	"""
+
 
 def p_arguement_name(p):
 	"""
@@ -612,12 +681,14 @@ def p_type(p):
 
 def p_type_annotation(p):
 	"""
-	type_annotation : COLON INOUT? type  
+	type_annotation : COLON INOUT type
+	| COLON type
 	"""
 
 def p_type_identifier(p):
 	"""
-	type_identifier : type_name (DOT type_identifier)? 
+	type_identifier : type_name DOT type_identifier
+	| type_name
 	"""
 
 def p_type_name(p):
@@ -628,7 +699,8 @@ def p_type_name(p):
 # // GRAMMAR OF A FUNCTION TYPE
 def p_function_type(p):
 	"""
-	function_type : function_type_argument_clause THROWS? ARROW type
+	function_type : function_type_argument_clause THROWS ARROW type
+	| function_type_argument_clause ARROW type
 	| function_type_argument_clause RETHROWS ARROW type
 	
 	"""
@@ -636,8 +708,8 @@ def p_function_type(p):
 def p_function_type_argument_clause(p):
 	"""
 	function_type_argument_clause : LPAREN RPAREN
-	| LPAREN function_type_argument_list range_operator? RPAREN
-	
+	| LPAREN function_type_argument_list range_operator RPAREN
+	| LPAREN function_type_argument_list  RPAREN
 	"""
 
 def p_function_type_argument_list(p):
@@ -649,7 +721,8 @@ def p_function_type_argument_list(p):
 
 def p_function_type_argument(p):
 	"""
-	function_type_argument : INOUT? type
+	function_type_argument : INOUT type
+	| type
 	| argument_label type_annotation
 	
 	"""
@@ -712,7 +785,7 @@ if __name__ == '__main__':
         sys.exit()
     filename = sys.argv[1]
     data = filename.read()
-    out_filename = filename.split(DOT)[0] + '.html'
+    out_filename = filename.split('.')[0] + '.html'
     fp_out = open(out_filename, 'w')
     parser = yacc.yacc()
     for statement in data:
