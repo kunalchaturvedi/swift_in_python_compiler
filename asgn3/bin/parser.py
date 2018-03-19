@@ -7,16 +7,14 @@ import sys
 
 # Precedence and associativity of operators
 precedence = (
-	('left', 'OR_ASSIGN')
-	('left', 'XOR_ASSIGN'),
+	('left', 'OR'),
 	('left', 'AND'),
-	('left', 'EQ_OP', 'NE_OP'),
-	('left', 'GT', 'GE', 'LT', 'LE'),
+	('left', 'EQUAL', 'NOTEQUAL'),
+	('left', 'GT', 'GTE', 'LT', 'LTE'),
 	('left', 'RSHIFT', 'LSHIFT'),
-	('left', 'ADD_ASSIGN', 'SUB_ASSIGN'),
-	('left', 'MUL_ASSIGN', 'DIV_ASSIGN', 'MOD_ASSIGN'),
-	('right', 'TILDE'),
-	('left', 'MEMBERACCESS')
+	('left', 'ADD', 'SUB'),
+	('left', 'MUL', 'DIV', 'MOD'),
+	('right', 'TILDE')
 )
 
 #  Statements 
@@ -35,12 +33,31 @@ def p_statements(p):
 
 def p_statement(p):
 	"""statement : expression 
-		| declaration_statement 
+		| declaration 
 		| loop_statement 
 		| branch_statement 
-		| control_transfer_statement 
+		| control_transfer_statement
+		| print_statement
 		"""
 	p[0]=p[1]
+
+
+def p_print_statement(p):
+	"""
+	print_statement : PRINT LPAREN print_arg_list RPAREN
+	"""
+
+def p_print_arg_list(p):
+	"""
+	print_arg_list : print_arg COMMA print_arg_list
+	 | print_arg
+	"""
+
+def p_print_arg(p):
+	"""
+	print_arg : identifier
+	| literal
+	"""
 
 def p_loop_statement(p):
 	"""
@@ -178,7 +195,7 @@ def p_break_statement(p):
 	break_statement : BREAK
 	"""
 
-def p_continue_statement():
+def p_continue_statement(p):
 	"""
 	continue_statement : CONTINUE
 	"""
@@ -211,7 +228,7 @@ def p_top_level_declaration(p):
 	"""
 
 # GRAMMAR OF A CODE BLOCK
-def code_block(p):
+def p_code_block(p):
 	"""
 	code_block : LCURLY statements RCURLY
 	| LCURLY RCURLY
@@ -257,14 +274,21 @@ def p_import_path_identifier(p):
 
 def p_constant_declaration(p):
 	"""
-	constant_declaration : declaration_modifiers LET pattern_initializer_list
-	| LET pattern_initializer_list
+	constant_declaration : LET pattern_initializer_list
 	"""
+# declaration_modifiers LET pattern_initializer_list
+
 
 def p_pattern_initializer_list(p):
 	"""
-	pattern_initializer_list : pattern_initializer (COMMA pattern_initializer)* 
+	pattern_initializer_list : pattern_initializer p_com_pat_init_star
 	"""
+def p_com_pat_init_star(p): #*
+	"""
+	p_com_pat_init_star : COMMA pattern_initializer p_com_pat_init_star
+	|
+	"""
+
 
 # /** rule is ambiguous. can match "var x = 1" with x as pattern
 #  *  OR with x as expression_pattern.
@@ -276,9 +300,9 @@ def p_pattern_initializer(p):
 	| pattern
 	"""
 
-def initializer(p):
+def p_initializer(p):
 	"""
-	initializer : assignment_operator expression  
+	initializer : EQUAL expression  
 	"""
 
 # // GRAMMAR OF A VARIABLE DECLARATION //-----------------//
@@ -286,6 +310,7 @@ def initializer(p):
 def p_variable_declaration(p):
 	"""
 	variable_declaration : variable_declaration_head variable_name type_annotation code_block
+	| variable_declaration_head variable_name type_annotation initializer
 	| variable_declaration_head pattern_initializer_list
 	
 	"""
@@ -296,9 +321,11 @@ def p_variable_declaration(p):
 
 def p_variable_declaration_head(p):
 	"""
-	variable_declaration_head : declaration_modifiers VAR
-	| VAR    
+	variable_declaration_head : VAR    
 	"""
+# declaration_modifiers VAR
+
+
 
 def p_variable_name(p):
 	"""
@@ -323,14 +350,16 @@ def p_variable_name(p):
 # // GRAMMAR OF A FUNCTION DECLARATION-------------------------
 def p_function_declaration(p):
 	"""
-	function_declaration : function_head function_name function_signature function_body? 
+	function_declaration : function_head function_name function_signature function_body
+	| function_head function_name function_signature 
 	"""
 
 def p_function_head(p):
 	"""
-	function_head : declaration_modifiers FUNC
-	| FUNC
+	function_head : FUNC
 	"""
+
+#  declaration_modifiers FUNC
 
 def p_function_name(p):
 	"""
@@ -382,8 +411,8 @@ def p_parameter(p):
 	|  local_parameter_name type_annotation 
 	|  local_parameter_name type_annotation default_argument_clause
 	| external_parameter_name local_parameter_name type_annotation 
-	| external_parameter_name local_parameter_name type_annotation range_operator
-	| local_parameter_name type_annotation range_operator
+	| external_parameter_name local_parameter_name type_annotation RANGEOP
+	| local_parameter_name type_annotation RANGEOP
 	
 	"""
 
@@ -399,7 +428,7 @@ def p_local_parameter_name(p):
 
 def p_default_argument_clause(p):
 	"""
-	default_argument_clause : assignment_operator expression 
+	default_argument_clause : EQUAL expression 
 	"""
 
 # // GRAMMAR OF A STRUCTURE DECLARATION todo did not update
@@ -496,6 +525,13 @@ def p_identifier_pattern(p):
 	identifier_pattern : declaration_identifier 
 	"""
 
+def p_value_binding_pattern(p):
+	"""
+	value_binding_pattern : VAR pattern
+	| LET pattern
+	"""
+
+
 def p_expression_pattern(p):
 	"""
 	expression_pattern : expression  
@@ -535,7 +571,7 @@ def p_in_out_expression(p):
 def p_binary_expression(p):
 	"""
 	binary_expression : binary_operator prefix_expression
-	| assignment_operator prefix_expression
+	| EQUAL prefix_expression
 	| conditional_operator  prefix_expression
 	"""
 
@@ -601,7 +637,7 @@ def p_postfix_expression(p):
 	| postfix_expression function_call_argument_clause
 	| postfix_expression DOT INIT 
 	| postfix_expression DOT INIT LPAREN argument_names RPAREN
-	| postfix_expression DOT Pure_decimal_digits
+	| postfix_expression DOT INT_CONST
 	| postfix_expression DOT declaration_identifier
 	| postfix_expression DOT declaration_identifier LPAREN argument_names RPAREN
 	| postfix_expression LPAREN argument_names RPAREN 
@@ -640,8 +676,14 @@ def p_function_call_argument_clause(p):
 
 def p_function_call_arguement_list(p):
 	"""
-	function_call_argument_list : function_call_argument ( COMMA function_call_argument )* 
+	function_call_argument_list : function_call_argument COMMAfunction_call_argument_star
 	"""
+def p_COMMAfunction_call_argument_star(p):#*
+	"""
+	COMMAfunction_call_argument_star : COMMA function_call_argument COMMAfunction_call_argument_star
+	|
+	"""
+
 
 def p_function_call_argument(p):
 	"""
@@ -693,7 +735,16 @@ def p_type_identifier(p):
 
 def p_type_name(p):
 	"""
-	type_name : declaration_identifier 
+	type_name : declaration_identifier
+	| type_keyword
+	"""
+
+def p_type_keywords(p):
+	"""
+	type_keyword : INT
+	| FLOAT
+	| DOUBLE
+	| STRING
 	"""
 
 # // GRAMMAR OF A FUNCTION TYPE
@@ -708,7 +759,7 @@ def p_function_type(p):
 def p_function_type_argument_clause(p):
 	"""
 	function_type_argument_clause : LPAREN RPAREN
-	| LPAREN function_type_argument_list range_operator RPAREN
+	| LPAREN function_type_argument_list RANGEOP RPAREN
 	| LPAREN function_type_argument_list  RPAREN
 	"""
 
@@ -741,7 +792,7 @@ def p_array_type(p):
 
 def p_identifier(p):
 	"""
-	identifier : Identifier
+	identifier : IDENTIFIER
 	"""
 # // identifier is context sensitive
 
@@ -749,45 +800,101 @@ def p_identifier(p):
 # // var x = 1 funx x() {} class x {}
 def p_declaration_identifier(p):
 	"""
-	declaration_identifier : Identifier
-	| keyword_as_identifier_in_declarations
-	
+	declaration_identifier : IDENTIFIER	
 	"""
 
 
 # // external, internal argument name
 def p_label_identifer(p):
 	"""
-	Identifier : Identifier_head Identifier_characters?
-	| '`' Identifier_head Identifier_characters? '`'
-	| Implicit_parameter_name
-	
+	label_identifier : IDENTIFIER
 	"""
 
 # need to take care of cases for == and other operators
 
 # need to add operators
 
+def p_prefix_operator(p):
+	"""
+	prefix_operator : operator
+	"""
+
+def p_binary_operator(p):
+	"""
+	binary_operator : operator
+	"""
+
+def p_postfix_operator(p):
+	"""
+	postfix_operator : operator
+	"""
+
+# ('/' | '=' | '-' | '+' | '!' | '*' | '%' | '&'
+#  | '|' | '<' | '>' | '^' | '~' | '?') 
+def p_operator(p):
+	"""
+	operator : DIV
+	| EQUAL
+	| SUB
+	| ADD
+	| EXCLAMATION
+	| MUL
+	| MOD
+	| AND
+	| OR
+	| LT
+	| GT
+	| CARET
+	| TILDE
+	| CONDOP
+	| conditional_operator
+	| ANDAND
+	| OROR
+	| NOT
+	"""
+
+def p_conditional_operator(p):
+	"""
+	conditional_operator : EQUALEQUAL
+	| NOTEQUAL
+	| LTE
+	| GTE
+	| LT
+	| GT
+	"""
 
 
-
-
-
-
+def p_literal(p):
+	"""
+	literal : STRING_LITERAL
+	| CHAR_CONST
+	| FLOAT_CONST
+	| INT_CONST
+	| NIL_LITERAL
+	"""
 
 ########################################################
 
 
+# Error rule for syntax errors
+def p_error(p):
+    if p:
+        print("Syntax error at '%s'" % p.value)
+    else:
+        print("Syntax error at EOF")
+
+def read_data(filename):
+    fp = open(filename, 'r')
+    data = fp.read()
+    fp.close()
+    return data
+
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print('Insufficient arguments!')
-        print('Format: python yacc.py katha.js')
+        print('Format: python yacc.py test.js')
         sys.exit()
     filename = sys.argv[1]
-    data = filename.read()
-    out_filename = filename.split('.')[0] + '.html'
-    fp_out = open(out_filename, 'w')
-    parser = yacc.yacc()
-    for statement in data:
-        result = parser.parse(statement)
-    fp_out.close()
+    data = read_data(filename)
+    parser = yacc.yacc(debug=True, optimize=False)
+    result = parser.parse(data, debug=2)

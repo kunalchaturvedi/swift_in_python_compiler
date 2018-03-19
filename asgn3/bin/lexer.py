@@ -11,7 +11,7 @@ keywords = (  'associatedtype', 'class', 'deinit' , 'enum', 'extension' , 'filep
 	'else', 'fallthrough', 'for', 'guard', 'if', 'in', 'repeat', 'return', 'switch',
 	'where', 'while',
 	'as', 'Any', 'catch', 'false', 'is', 'nil', 'rethrows', 'super',  'Self', 
-	'throw', 'throws', 'true', 'try', 'print','Int','Float','Double',
+	'throw', 'throws', 'true', 'try', 'print','Int','Float','Double','String',
 	'_',
 	# '#available', '#colorLiteral', '#column', '#else', 
 	# '#elseif', '#endif', '#file', '#fileLiteral', '#function', '#if', '#imageLiteral',
@@ -28,8 +28,9 @@ tokens = [ # 'NAME', 'LINE_COMMENT', 'BLOCK_COMMENT','ESCAPE_CHAR' , 'STRING_LIT
         'GT','LT','EQUAL','RBRACK','LBRACK','RCURLY','LCURLY','RPAREN',
         'LPAREN','NOT','TILDE','OR','AND','MOD','DIV','MUL','SUB',
         'ADD','COLON','SEMICOLON','COMMA','DOT','CARET',
-        'IDENTIFIER','STRING_LITERAL','CHAR_CONST','FLOAT_CONST','LINE_COMMENT',
-        'EQUALEQUAL','NOTEQUAL', 'OROR', 'ANDAND', 'LTE', 'GTE', 'ARROW', 'CONDOP', 'ATRATE'
+        'IDENTIFIER','STRING_LITERAL','CHAR_CONST','INT_CONST','FLOAT_CONST','LINE_COMMENT','NIL_LITERAL',
+        'EQUALEQUAL','NOTEQUAL', 'OROR', 'ANDAND', 'LTE', 'GTE', 'ARROW', 'CONDOP', 'ATRATE', 'EXCLAMATION',
+        'RSHIFT','LSHIFT', 'RANGEOP'
         ] + [k.upper() for k in keywords]
 
 
@@ -53,6 +54,9 @@ def t_CHAR_CONST(t):
     r'\'[A-Za-z]\''
     return t
 
+def t_NIL_LITERAL(t):
+    r'nil'
+    return t
 
 FLOAT_CONST = r"""
 (?:
@@ -120,7 +124,7 @@ t_LCURLY     = r'{'
 t_RCURLY    = r'}'              
 t_LBRACK   = r'\['
 t_RBRACK  = r'\]'
-t_EQUAL       = r'='
+t_EQUAL       = r'\='
 t_EQUALEQUAL         = r'=='
 t_NOTEQUAL      = r'!='
 t_LT            = r'<'              
@@ -132,7 +136,9 @@ t_ANDAND          = r'&&'
 
 t_ARROW         = r'->'
 t_ATRATE        = r'@'
+t_EXCLAMATION   = r'!'
 
+t_RANGEOP   = r'\.\.\.'
 
 # GT,LT,EQUAL,RBRACK,LBRACK,RCURLY,LCURLY,RPAREN,LPAREN,NOT,TILDE,
 # OR,AND,MOD,DIV,MUL,SUB,ADD,COLON,SEMI,COMMA,DOT,CARET
@@ -148,8 +154,8 @@ t_ATRATE        = r'@'
 # t_AND_ASSIGN = r'&='
 # t_XOR_ASSIGN = r'\^='
 # t_OR_ASSIGN = r'\|='
-# t_RIGHT_OP = r'>>'
-# t_LEFT_OP = r'<<'
+t_RSHIFT = r'>>'
+t_LSHIFT = r'<<'
 # t_INC_OP = r'\+\+'
 # t_DEC_OP = r'--'
 
