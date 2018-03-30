@@ -1,0 +1,1417 @@
+PLY: PARSE DEBUG START
+
+State  : 0
+Stack  : . LexToken(FUNC,'func',1,0)
+Action : Shift and goto state 26
+
+State  : 26
+Stack  : FUNC . LexToken(IDENTIFIER,'main',1,5)
+Action : Reduce rule [function_head -> FUNC] with ['func'] and goto state 75
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 75
+Stack  : function_head . LexToken(IDENTIFIER,'main',1,5)
+Action : Shift and goto state 63
+
+State  : 63
+Stack  : function_head IDENTIFIER . LexToken(LPAREN,'(',1,9)
+Action : Reduce rule [declaration_identifier -> IDENTIFIER] with ['main'] and goto state 145
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 145
+Defaulted state 145: Reduce using 96
+Stack  : function_head declaration_identifier . LexToken(LPAREN,'(',1,9)
+Action : Reduce rule [function_name -> declaration_identifier] with [None] and goto state 146
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 146
+Stack  : function_head function_name . LexToken(LPAREN,'(',1,9)
+Action : Shift and goto state 197
+
+State  : 197
+Stack  : function_head function_name LPAREN . LexToken(IDENTIFIER,'na',1,10)
+Action : Shift and goto state 263
+
+State  : 263
+Stack  : function_head function_name LPAREN IDENTIFIER . LexToken(COLON,':',1,12)
+Action : Reduce rule [label_identifier -> IDENTIFIER] with ['na'] and goto state 262
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 262
+Stack  : function_head function_name LPAREN label_identifier . LexToken(COLON,':',1,12)
+Action : Reduce rule [local_parameter_name -> label_identifier] with [None] and goto state 259
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 259
+Stack  : function_head function_name LPAREN local_parameter_name . LexToken(COLON,':',1,12)
+Action : Shift and goto state 162
+
+State  : 162
+Stack  : function_head function_name LPAREN local_parameter_name COLON . LexToken(INT,'Int',1,14)
+Action : Shift and goto state 233
+
+State  : 233
+Stack  : function_head function_name LPAREN local_parameter_name COLON INT . LexToken(COMMA,',',1,17)
+Action : Reduce rule [type_keyword -> INT] with ['Int'] and goto state 224
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 224
+Stack  : function_head function_name LPAREN local_parameter_name COLON type_keyword . LexToken(COMMA,',',1,17)
+Action : Reduce rule [type_name -> type_keyword] with [None] and goto state 225
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 225
+Stack  : function_head function_name LPAREN local_parameter_name COLON type_name . LexToken(COMMA,',',1,17)
+Action : Reduce rule [type_identifier -> type_name] with [None] and goto state 222
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 222
+Stack  : function_head function_name LPAREN local_parameter_name COLON type_identifier . LexToken(COMMA,',',1,17)
+Action : Reduce rule [type -> type_identifier] with [None] and goto state 228
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 228
+Stack  : function_head function_name LPAREN local_parameter_name COLON type . LexToken(COMMA,',',1,17)
+Action : Reduce rule [type_annotation -> COLON type] with [':',None] and goto state 312
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 312
+Stack  : function_head function_name LPAREN local_parameter_name type_annotation . LexToken(COMMA,',',1,17)
+Action : Reduce rule [parameter -> local_parameter_name type_annotation] with [None,None] and goto state 264
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 264
+Stack  : function_head function_name LPAREN parameter . LexToken(COMMA,',',1,17)
+Action : Shift and goto state 314
+
+State  : 314
+Stack  : function_head function_name LPAREN parameter COMMA . LexToken(IDENTIFIER,'argv',1,19)
+Action : Shift and goto state 263
+
+State  : 263
+Stack  : function_head function_name LPAREN parameter COMMA IDENTIFIER . LexToken(COLON,':',1,23)
+Action : Reduce rule [label_identifier -> IDENTIFIER] with ['argv'] and goto state 262
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 262
+Stack  : function_head function_name LPAREN parameter COMMA label_identifier . LexToken(COLON,':',1,23)
+Action : Reduce rule [local_parameter_name -> label_identifier] with [None] and goto state 259
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 259
+Stack  : function_head function_name LPAREN parameter COMMA local_parameter_name . LexToken(COLON,':',1,23)
+Action : Shift and goto state 162
+
+State  : 162
+Stack  : function_head function_name LPAREN parameter COMMA local_parameter_name COLON . LexToken(LBRACK,'[',1,25)
+Action : Shift and goto state 236
+
+State  : 236
+Stack  : function_head function_name LPAREN parameter COMMA local_parameter_name COLON LBRACK . LexToken(INT,'Int',1,26)
+Action : Shift and goto state 233
+
+State  : 233
+Stack  : function_head function_name LPAREN parameter COMMA local_parameter_name COLON LBRACK INT . LexToken(RBRACK,']',1,29)
+Action : Reduce rule [type_keyword -> INT] with ['Int'] and goto state 224
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 224
+Stack  : function_head function_name LPAREN parameter COMMA local_parameter_name COLON LBRACK type_keyword . LexToken(RBRACK,']',1,29)
+Action : Reduce rule [type_name -> type_keyword] with [None] and goto state 225
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 225
+Stack  : function_head function_name LPAREN parameter COMMA local_parameter_name COLON LBRACK type_name . LexToken(RBRACK,']',1,29)
+Action : Reduce rule [type_identifier -> type_name] with [None] and goto state 222
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 222
+Stack  : function_head function_name LPAREN parameter COMMA local_parameter_name COLON LBRACK type_identifier . LexToken(RBRACK,']',1,29)
+Action : Reduce rule [type -> type_identifier] with [None] and goto state 299
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 299
+Stack  : function_head function_name LPAREN parameter COMMA local_parameter_name COLON LBRACK type . LexToken(RBRACK,']',1,29)
+Action : Shift and goto state 342
+
+State  : 342
+Stack  : function_head function_name LPAREN parameter COMMA local_parameter_name COLON LBRACK type RBRACK . LexToken(RPAREN,')',1,30)
+Action : Reduce rule [array_type -> LBRACK type RBRACK] with ['[',None,']'] and goto state 232
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 232
+Stack  : function_head function_name LPAREN parameter COMMA local_parameter_name COLON array_type . LexToken(RPAREN,')',1,30)
+Action : Reduce rule [type -> array_type] with [None] and goto state 228
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 228
+Stack  : function_head function_name LPAREN parameter COMMA local_parameter_name COLON type . LexToken(RPAREN,')',1,30)
+Action : Reduce rule [type_annotation -> COLON type] with [':',None] and goto state 312
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 312
+Stack  : function_head function_name LPAREN parameter COMMA local_parameter_name type_annotation . LexToken(RPAREN,')',1,30)
+Action : Reduce rule [parameter -> local_parameter_name type_annotation] with [None,None] and goto state 352
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 352
+Stack  : function_head function_name LPAREN parameter COMMA parameter . LexToken(RPAREN,')',1,30)
+Action : Reduce rule [commapar -> <empty>] with [] and goto state 368
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 368
+Defaulted state 368: Reduce using 109
+Stack  : function_head function_name LPAREN parameter COMMA parameter commapar . LexToken(RPAREN,')',1,30)
+Action : Reduce rule [commapar -> COMMA parameter commapar] with [',',None,None] and goto state 315
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 315
+Defaulted state 315: Reduce using 108
+Stack  : function_head function_name LPAREN parameter commapar . LexToken(RPAREN,')',1,30)
+Action : Reduce rule [parameter_list -> parameter commapar] with [None,None] and goto state 261
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 261
+Stack  : function_head function_name LPAREN parameter_list . LexToken(RPAREN,')',1,30)
+Action : Shift and goto state 313
+
+State  : 313
+Stack  : function_head function_name LPAREN parameter_list RPAREN . LexToken(ARROW,'->',1,32)
+Action : Reduce rule [parameter_clause -> LPAREN parameter_list RPAREN] with ['(',None,')'] and goto state 198
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 198
+Stack  : function_head function_name parameter_clause . LexToken(ARROW,'->',1,32)
+Action : Shift and goto state 267
+
+State  : 267
+Stack  : function_head function_name parameter_clause ARROW . LexToken(INT,'Int',1,35)
+Action : Shift and goto state 233
+
+State  : 233
+Stack  : function_head function_name parameter_clause ARROW INT . LexToken(LCURLY,'{',1,39)
+Action : Reduce rule [type_keyword -> INT] with ['Int'] and goto state 224
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 224
+Stack  : function_head function_name parameter_clause ARROW type_keyword . LexToken(LCURLY,'{',1,39)
+Action : Reduce rule [type_name -> type_keyword] with [None] and goto state 225
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 225
+Stack  : function_head function_name parameter_clause ARROW type_name . LexToken(LCURLY,'{',1,39)
+Action : Reduce rule [type_identifier -> type_name] with [None] and goto state 222
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 222
+Stack  : function_head function_name parameter_clause ARROW type_identifier . LexToken(LCURLY,'{',1,39)
+Action : Reduce rule [type -> type_identifier] with [None] and goto state 318
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 318
+Stack  : function_head function_name parameter_clause ARROW type . LexToken(LCURLY,'{',1,39)
+Action : Reduce rule [function_result -> ARROW type] with ['->',None] and goto state 266
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 266
+Stack  : function_head function_name parameter_clause function_result . LexToken(LCURLY,'{',1,39)
+Action : Reduce rule [function_signature -> parameter_clause function_result] with [None,None] and goto state 196
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 196
+Stack  : function_head function_name function_signature . LexToken(LCURLY,'{',1,39)
+Action : Shift and goto state 113
+
+State  : 113
+Stack  : function_head function_name function_signature LCURLY . LexToken(LCURLY,'{',2,41)
+ERROR: Error  : function_head function_name function_signature LCURLY . LexToken(LCURLY,'{',2,41)
+
+State  : 113
+Stack  : function_head function_name function_signature LCURLY . error
+ERROR: Error  : function_head function_name function_signature LCURLY . error
+
+State  : 196
+Stack  : function_head function_name function_signature . error
+ERROR: Error  : function_head function_name function_signature . error
+
+State  : 146
+Stack  : function_head function_name . error
+ERROR: Error  : function_head function_name . error
+
+State  : 75
+Stack  : function_head . error
+ERROR: Error  : function_head . error
+
+State  : 0
+Stack  : . error
+ERROR: Error  : . error
+
+State  : 0
+Stack  : . LexToken(VAR,'var',3,47)
+Action : Shift and goto state 12
+
+State  : 12
+Stack  : VAR . LexToken(IDENTIFIER,'wflg',3,51)
+Action : Reduce rule [variable_declaration_head -> VAR] with ['var'] and goto state 19
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 19
+Stack  : variable_declaration_head . LexToken(IDENTIFIER,'wflg',3,51)
+Action : Shift and goto state 63
+
+State  : 63
+Stack  : variable_declaration_head IDENTIFIER . LexToken(EQUAL,'=',3,56)
+Action : Reduce rule [declaration_identifier -> IDENTIFIER] with ['wflg'] and goto state 105
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 105
+Stack  : variable_declaration_head declaration_identifier . LexToken(EQUAL,'=',3,56)
+Action : Reduce rule [identifier_pattern -> declaration_identifier] with [None] and goto state 107
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 107
+Stack  : variable_declaration_head identifier_pattern . LexToken(EQUAL,'=',3,56)
+Action : Reduce rule [pattern -> identifier_pattern] with [None] and goto state 101
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 101
+Stack  : variable_declaration_head pattern . LexToken(EQUAL,'=',3,56)
+Action : Shift and goto state 159
+
+State  : 159
+Stack  : variable_declaration_head pattern EQUAL . LexToken(INT_CONST,'0',3,58)
+Action : Shift and goto state 47
+
+State  : 47
+Stack  : variable_declaration_head pattern EQUAL INT_CONST . LexToken(VAR,'var',4,64)
+Action : Reduce rule [literal -> INT_CONST] with ['0'] and goto state 82
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 82
+Stack  : variable_declaration_head pattern EQUAL literal . LexToken(VAR,'var',4,64)
+Action : Reduce rule [literal_expression -> literal] with [None] and goto state 28
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 28
+Stack  : variable_declaration_head pattern EQUAL literal_expression . LexToken(VAR,'var',4,64)
+Action : Reduce rule [primary_expression -> literal_expression] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : variable_declaration_head pattern EQUAL primary_expression . LexToken(VAR,'var',4,64)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : variable_declaration_head pattern EQUAL postfix_expression . LexToken(VAR,'var',4,64)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : variable_declaration_head pattern EQUAL prefix_expression . LexToken(VAR,'var',4,64)
+Action : Reduce rule [expression -> prefix_expression] with [None] and goto state 219
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 219
+Stack  : variable_declaration_head pattern EQUAL expression . LexToken(VAR,'var',4,64)
+Action : Reduce rule [initializer -> EQUAL expression] with ['=',None] and goto state 160
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 160
+Stack  : variable_declaration_head pattern initializer . LexToken(VAR,'var',4,64)
+Action : Reduce rule [pattern_initializer -> pattern initializer] with [None,None] and goto state 106
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 106
+Stack  : variable_declaration_head pattern_initializer . LexToken(VAR,'var',4,64)
+Action : Reduce rule [p_com_pat_init_star -> <empty>] with [] and goto state 164
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 164
+Stack  : variable_declaration_head pattern_initializer p_com_pat_init_star . LexToken(VAR,'var',4,64)
+Action : Reduce rule [pattern_initializer_list -> pattern_initializer p_com_pat_init_star] with [None,None] and goto state 103
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 103
+Stack  : variable_declaration_head pattern_initializer_list . LexToken(VAR,'var',4,64)
+Action : Reduce rule [variable_declaration -> variable_declaration_head pattern_initializer_list] with [None,None] and goto state 45
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 45
+Stack  : variable_declaration . LexToken(VAR,'var',4,64)
+Action : Reduce rule [declaration -> variable_declaration] with [None] and goto state 59
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 59
+Stack  : declaration . LexToken(VAR,'var',4,64)
+Action : Reduce rule [statement -> declaration] with [None] and goto state 51
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 51
+Stack  : statement . LexToken(VAR,'var',4,64)
+Action : Shift and goto state 12
+
+State  : 12
+Stack  : statement VAR . LexToken(IDENTIFIER,'tflg',4,68)
+Action : Reduce rule [variable_declaration_head -> VAR] with ['var'] and goto state 19
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 19
+Stack  : statement variable_declaration_head . LexToken(IDENTIFIER,'tflg',4,68)
+Action : Shift and goto state 63
+
+State  : 63
+Stack  : statement variable_declaration_head IDENTIFIER . LexToken(EQUAL,'=',4,73)
+Action : Reduce rule [declaration_identifier -> IDENTIFIER] with ['tflg'] and goto state 105
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 105
+Stack  : statement variable_declaration_head declaration_identifier . LexToken(EQUAL,'=',4,73)
+Action : Reduce rule [identifier_pattern -> declaration_identifier] with [None] and goto state 107
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 107
+Stack  : statement variable_declaration_head identifier_pattern . LexToken(EQUAL,'=',4,73)
+Action : Reduce rule [pattern -> identifier_pattern] with [None] and goto state 101
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 101
+Stack  : statement variable_declaration_head pattern . LexToken(EQUAL,'=',4,73)
+Action : Shift and goto state 159
+
+State  : 159
+Stack  : statement variable_declaration_head pattern EQUAL . LexToken(INT_CONST,'0',4,75)
+Action : Shift and goto state 47
+
+State  : 47
+Stack  : statement variable_declaration_head pattern EQUAL INT_CONST . LexToken(VAR,'var',5,81)
+Action : Reduce rule [literal -> INT_CONST] with ['0'] and goto state 82
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 82
+Stack  : statement variable_declaration_head pattern EQUAL literal . LexToken(VAR,'var',5,81)
+Action : Reduce rule [literal_expression -> literal] with [None] and goto state 28
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 28
+Stack  : statement variable_declaration_head pattern EQUAL literal_expression . LexToken(VAR,'var',5,81)
+Action : Reduce rule [primary_expression -> literal_expression] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement variable_declaration_head pattern EQUAL primary_expression . LexToken(VAR,'var',5,81)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement variable_declaration_head pattern EQUAL postfix_expression . LexToken(VAR,'var',5,81)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : statement variable_declaration_head pattern EQUAL prefix_expression . LexToken(VAR,'var',5,81)
+Action : Reduce rule [expression -> prefix_expression] with [None] and goto state 219
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 219
+Stack  : statement variable_declaration_head pattern EQUAL expression . LexToken(VAR,'var',5,81)
+Action : Reduce rule [initializer -> EQUAL expression] with ['=',None] and goto state 160
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 160
+Stack  : statement variable_declaration_head pattern initializer . LexToken(VAR,'var',5,81)
+Action : Reduce rule [pattern_initializer -> pattern initializer] with [None,None] and goto state 106
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 106
+Stack  : statement variable_declaration_head pattern_initializer . LexToken(VAR,'var',5,81)
+Action : Reduce rule [p_com_pat_init_star -> <empty>] with [] and goto state 164
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 164
+Stack  : statement variable_declaration_head pattern_initializer p_com_pat_init_star . LexToken(VAR,'var',5,81)
+Action : Reduce rule [pattern_initializer_list -> pattern_initializer p_com_pat_init_star] with [None,None] and goto state 103
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 103
+Stack  : statement variable_declaration_head pattern_initializer_list . LexToken(VAR,'var',5,81)
+Action : Reduce rule [variable_declaration -> variable_declaration_head pattern_initializer_list] with [None,None] and goto state 45
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 45
+Stack  : statement variable_declaration . LexToken(VAR,'var',5,81)
+Action : Reduce rule [declaration -> variable_declaration] with [None] and goto state 59
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 59
+Stack  : statement declaration . LexToken(VAR,'var',5,81)
+Action : Reduce rule [statement -> declaration] with [None] and goto state 51
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 51
+Stack  : statement statement . LexToken(VAR,'var',5,81)
+Action : Shift and goto state 12
+
+State  : 12
+Stack  : statement statement VAR . LexToken(IDENTIFIER,'dflg',5,85)
+Action : Reduce rule [variable_declaration_head -> VAR] with ['var'] and goto state 19
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 19
+Stack  : statement statement variable_declaration_head . LexToken(IDENTIFIER,'dflg',5,85)
+Action : Shift and goto state 63
+
+State  : 63
+Stack  : statement statement variable_declaration_head IDENTIFIER . LexToken(EQUAL,'=',5,90)
+Action : Reduce rule [declaration_identifier -> IDENTIFIER] with ['dflg'] and goto state 105
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 105
+Stack  : statement statement variable_declaration_head declaration_identifier . LexToken(EQUAL,'=',5,90)
+Action : Reduce rule [identifier_pattern -> declaration_identifier] with [None] and goto state 107
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 107
+Stack  : statement statement variable_declaration_head identifier_pattern . LexToken(EQUAL,'=',5,90)
+Action : Reduce rule [pattern -> identifier_pattern] with [None] and goto state 101
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 101
+Stack  : statement statement variable_declaration_head pattern . LexToken(EQUAL,'=',5,90)
+Action : Shift and goto state 159
+
+State  : 159
+Stack  : statement statement variable_declaration_head pattern EQUAL . LexToken(INT_CONST,'0',5,92)
+Action : Shift and goto state 47
+
+State  : 47
+Stack  : statement statement variable_declaration_head pattern EQUAL INT_CONST . LexToken(VAR,'var',6,98)
+Action : Reduce rule [literal -> INT_CONST] with ['0'] and goto state 82
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 82
+Stack  : statement statement variable_declaration_head pattern EQUAL literal . LexToken(VAR,'var',6,98)
+Action : Reduce rule [literal_expression -> literal] with [None] and goto state 28
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 28
+Stack  : statement statement variable_declaration_head pattern EQUAL literal_expression . LexToken(VAR,'var',6,98)
+Action : Reduce rule [primary_expression -> literal_expression] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement statement variable_declaration_head pattern EQUAL primary_expression . LexToken(VAR,'var',6,98)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement statement variable_declaration_head pattern EQUAL postfix_expression . LexToken(VAR,'var',6,98)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : statement statement variable_declaration_head pattern EQUAL prefix_expression . LexToken(VAR,'var',6,98)
+Action : Reduce rule [expression -> prefix_expression] with [None] and goto state 219
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 219
+Stack  : statement statement variable_declaration_head pattern EQUAL expression . LexToken(VAR,'var',6,98)
+Action : Reduce rule [initializer -> EQUAL expression] with ['=',None] and goto state 160
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 160
+Stack  : statement statement variable_declaration_head pattern initializer . LexToken(VAR,'var',6,98)
+Action : Reduce rule [pattern_initializer -> pattern initializer] with [None,None] and goto state 106
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 106
+Stack  : statement statement variable_declaration_head pattern_initializer . LexToken(VAR,'var',6,98)
+Action : Reduce rule [p_com_pat_init_star -> <empty>] with [] and goto state 164
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 164
+Stack  : statement statement variable_declaration_head pattern_initializer p_com_pat_init_star . LexToken(VAR,'var',6,98)
+Action : Reduce rule [pattern_initializer_list -> pattern_initializer p_com_pat_init_star] with [None,None] and goto state 103
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 103
+Stack  : statement statement variable_declaration_head pattern_initializer_list . LexToken(VAR,'var',6,98)
+Action : Reduce rule [variable_declaration -> variable_declaration_head pattern_initializer_list] with [None,None] and goto state 45
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 45
+Stack  : statement statement variable_declaration . LexToken(VAR,'var',6,98)
+Action : Reduce rule [declaration -> variable_declaration] with [None] and goto state 59
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 59
+Stack  : statement statement declaration . LexToken(VAR,'var',6,98)
+Action : Reduce rule [statement -> declaration] with [None] and goto state 51
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 51
+Stack  : statement statement statement . LexToken(VAR,'var',6,98)
+Action : Shift and goto state 12
+
+State  : 12
+Stack  : statement statement statement VAR . LexToken(IDENTIFIER,'c',6,102)
+Action : Reduce rule [variable_declaration_head -> VAR] with ['var'] and goto state 19
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 19
+Stack  : statement statement statement variable_declaration_head . LexToken(IDENTIFIER,'c',6,102)
+Action : Shift and goto state 63
+
+State  : 63
+Stack  : statement statement statement variable_declaration_head IDENTIFIER . LexToken(SWITCH,'switch',7,108)
+Action : Reduce rule [declaration_identifier -> IDENTIFIER] with ['c'] and goto state 105
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 105
+Stack  : statement statement statement variable_declaration_head declaration_identifier . LexToken(SWITCH,'switch',7,108)
+Action : Reduce rule [identifier_pattern -> declaration_identifier] with [None] and goto state 107
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 107
+Stack  : statement statement statement variable_declaration_head identifier_pattern . LexToken(SWITCH,'switch',7,108)
+Action : Reduce rule [pattern -> identifier_pattern] with [None] and goto state 101
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 101
+Stack  : statement statement statement variable_declaration_head pattern . LexToken(SWITCH,'switch',7,108)
+Action : Reduce rule [pattern_initializer -> pattern] with [None] and goto state 106
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 106
+Stack  : statement statement statement variable_declaration_head pattern_initializer . LexToken(SWITCH,'switch',7,108)
+Action : Reduce rule [p_com_pat_init_star -> <empty>] with [] and goto state 164
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 164
+Stack  : statement statement statement variable_declaration_head pattern_initializer p_com_pat_init_star . LexToken(SWITCH,'switch',7,108)
+Action : Reduce rule [pattern_initializer_list -> pattern_initializer p_com_pat_init_star] with [None,None] and goto state 103
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 103
+Stack  : statement statement statement variable_declaration_head pattern_initializer_list . LexToken(SWITCH,'switch',7,108)
+Action : Reduce rule [variable_declaration -> variable_declaration_head pattern_initializer_list] with [None,None] and goto state 45
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 45
+Stack  : statement statement statement variable_declaration . LexToken(SWITCH,'switch',7,108)
+Action : Reduce rule [declaration -> variable_declaration] with [None] and goto state 59
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 59
+Stack  : statement statement statement declaration . LexToken(SWITCH,'switch',7,108)
+Action : Reduce rule [statement -> declaration] with [None] and goto state 51
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 51
+Stack  : statement statement statement statement . LexToken(SWITCH,'switch',7,108)
+Action : Shift and goto state 50
+
+State  : 50
+Stack  : statement statement statement statement SWITCH . LexToken(IDENTIFIER,'c',7,115)
+Action : Shift and goto state 63
+
+State  : 63
+Stack  : statement statement statement statement SWITCH IDENTIFIER . LexToken(LCURLY,'{',8,121)
+Action : Reduce rule [declaration_identifier -> IDENTIFIER] with ['c'] and goto state 23
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 23
+Stack  : statement statement statement statement SWITCH declaration_identifier . LexToken(LCURLY,'{',8,121)
+Action : Reduce rule [primary_expression -> declaration_identifier] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement statement statement statement SWITCH primary_expression . LexToken(LCURLY,'{',8,121)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement statement statement statement SWITCH postfix_expression . LexToken(LCURLY,'{',8,121)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : statement statement statement statement SWITCH prefix_expression . LexToken(LCURLY,'{',8,121)
+Action : Reduce rule [expression -> prefix_expression] with [None] and goto state 130
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 130
+Stack  : statement statement statement statement SWITCH expression . LexToken(LCURLY,'{',8,121)
+Action : Shift and goto state 190
+
+State  : 190
+Stack  : statement statement statement statement SWITCH expression LCURLY . LexToken(CASE,'case',9,131)
+Action : Shift and goto state 250
+
+State  : 250
+Stack  : statement statement statement statement SWITCH expression LCURLY CASE . LexToken(CHAR_CONST,"'w'",9,136)
+Action : Shift and goto state 66
+
+State  : 66
+Stack  : statement statement statement statement SWITCH expression LCURLY CASE CHAR_CONST . LexToken(COLON,':',9,139)
+Action : Reduce rule [literal -> CHAR_CONST] with ["'w'"] and goto state 82
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 82
+Stack  : statement statement statement statement SWITCH expression LCURLY CASE literal . LexToken(COLON,':',9,139)
+Action : Reduce rule [literal_expression -> literal] with [None] and goto state 28
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 28
+Stack  : statement statement statement statement SWITCH expression LCURLY CASE literal_expression . LexToken(COLON,':',9,139)
+Action : Reduce rule [primary_expression -> literal_expression] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement statement statement statement SWITCH expression LCURLY CASE primary_expression . LexToken(COLON,':',9,139)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement statement statement statement SWITCH expression LCURLY CASE postfix_expression . LexToken(COLON,':',9,139)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : statement statement statement statement SWITCH expression LCURLY CASE prefix_expression . LexToken(COLON,':',9,139)
+Action : Reduce rule [expression -> prefix_expression] with [None] and goto state 111
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 111
+Stack  : statement statement statement statement SWITCH expression LCURLY CASE expression . LexToken(COLON,':',9,139)
+Action : Reduce rule [expression_pattern -> expression] with [None] and goto state 102
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 102
+Stack  : statement statement statement statement SWITCH expression LCURLY CASE expression_pattern . LexToken(COLON,':',9,139)
+Action : Reduce rule [pattern -> expression_pattern] with [None] and goto state 305
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 305
+Stack  : statement statement statement statement SWITCH expression LCURLY CASE pattern . LexToken(COLON,':',9,139)
+Action : Reduce rule [case_item_list -> pattern] with [None] and goto state 306
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 306
+Stack  : statement statement statement statement SWITCH expression LCURLY CASE case_item_list . LexToken(COLON,':',9,139)
+Action : Shift and goto state 348
+
+State  : 348
+Stack  : statement statement statement statement SWITCH expression LCURLY CASE case_item_list COLON . LexToken(CASE,'case',10,149)
+Action : Reduce rule [case_label -> CASE case_item_list COLON] with ['case',None,':'] and goto state 251
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 251
+Stack  : statement statement statement statement SWITCH expression LCURLY case_label . LexToken(CASE,'case',10,149)
+Action : Reduce rule [statements -> <empty>] with [] and goto state 307
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 307
+Stack  : statement statement statement statement SWITCH expression LCURLY case_label statements . LexToken(CASE,'case',10,149)
+Action : Reduce rule [switch_case -> case_label statements] with [None,None] and goto state 252
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 252
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case . LexToken(CASE,'case',10,149)
+Action : Shift and goto state 250
+
+State  : 250
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case CASE . LexToken(CHAR_CONST,"'W'",10,154)
+Action : Shift and goto state 66
+
+State  : 66
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case CASE CHAR_CONST . LexToken(COLON,':',10,157)
+Action : Reduce rule [literal -> CHAR_CONST] with ["'W'"] and goto state 82
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 82
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case CASE literal . LexToken(COLON,':',10,157)
+Action : Reduce rule [literal_expression -> literal] with [None] and goto state 28
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 28
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case CASE literal_expression . LexToken(COLON,':',10,157)
+Action : Reduce rule [primary_expression -> literal_expression] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case CASE primary_expression . LexToken(COLON,':',10,157)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case CASE postfix_expression . LexToken(COLON,':',10,157)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case CASE prefix_expression . LexToken(COLON,':',10,157)
+Action : Reduce rule [expression -> prefix_expression] with [None] and goto state 111
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 111
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case CASE expression . LexToken(COLON,':',10,157)
+Action : Reduce rule [expression_pattern -> expression] with [None] and goto state 102
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 102
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case CASE expression_pattern . LexToken(COLON,':',10,157)
+Action : Reduce rule [pattern -> expression_pattern] with [None] and goto state 305
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 305
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case CASE pattern . LexToken(COLON,':',10,157)
+Action : Reduce rule [case_item_list -> pattern] with [None] and goto state 306
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 306
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case CASE case_item_list . LexToken(COLON,':',10,157)
+Action : Shift and goto state 348
+
+State  : 348
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case CASE case_item_list COLON . LexToken(IDENTIFIER,'wflg',11,171)
+Action : Reduce rule [case_label -> CASE case_item_list COLON] with ['case',None,':'] and goto state 251
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 251
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label . LexToken(IDENTIFIER,'wflg',11,171)
+Action : Shift and goto state 63
+
+State  : 63
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label IDENTIFIER . LexToken(EQUAL,'=',11,176)
+Action : Reduce rule [declaration_identifier -> IDENTIFIER] with ['wflg'] and goto state 23
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 23
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label declaration_identifier . LexToken(EQUAL,'=',11,176)
+Action : Reduce rule [primary_expression -> declaration_identifier] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label primary_expression . LexToken(EQUAL,'=',11,176)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label postfix_expression . LexToken(EQUAL,'=',11,176)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label prefix_expression . LexToken(EQUAL,'=',11,176)
+Action : Shift and goto state 132
+
+State  : 132
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label prefix_expression EQUAL . LexToken(INT_CONST,'1',11,178)
+Action : Reduce rule [operator -> EQUAL] with ['='] and goto state 133
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 133
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label prefix_expression operator . LexToken(INT_CONST,'1',11,178)
+Action : Reduce rule [binary_operator -> operator] with [None] and goto state 140
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 140
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label prefix_expression binary_operator . LexToken(INT_CONST,'1',11,178)
+Action : Shift and goto state 47
+
+State  : 47
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label prefix_expression binary_operator INT_CONST . LexToken(CASE,'case',12,188)
+Action : Reduce rule [literal -> INT_CONST] with ['1'] and goto state 82
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 82
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label prefix_expression binary_operator literal . LexToken(CASE,'case',12,188)
+Action : Reduce rule [literal_expression -> literal] with [None] and goto state 28
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 28
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label prefix_expression binary_operator literal_expression . LexToken(CASE,'case',12,188)
+Action : Reduce rule [primary_expression -> literal_expression] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label prefix_expression binary_operator primary_expression . LexToken(CASE,'case',12,188)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label prefix_expression binary_operator postfix_expression . LexToken(CASE,'case',12,188)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 194
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 194
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label prefix_expression binary_operator prefix_expression . LexToken(CASE,'case',12,188)
+Action : Reduce rule [binary_expression -> binary_operator prefix_expression] with [None,None] and goto state 139
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 139
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label prefix_expression binary_expression . LexToken(CASE,'case',12,188)
+Action : Reduce rule [binary_expression_plus -> binary_expression] with [None] and goto state 134
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 134
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label prefix_expression binary_expression_plus . LexToken(CASE,'case',12,188)
+Action : Reduce rule [binary_expressions -> binary_expression_plus] with [None] and goto state 137
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 137
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label prefix_expression binary_expressions . LexToken(CASE,'case',12,188)
+Action : Reduce rule [expression -> prefix_expression binary_expressions] with [None,None] and goto state 35
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 35
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label expression . LexToken(CASE,'case',12,188)
+Action : Reduce rule [statement -> expression] with [None] and goto state 51
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 51
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label statement . LexToken(CASE,'case',12,188)
+Action : Reduce rule [statements -> <empty>] with [] and goto state 131
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 131
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label statement statements . LexToken(CASE,'case',12,188)
+Action : Reduce rule [statements -> statement statements] with [None,None] and goto state 307
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 307
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case case_label statements . LexToken(CASE,'case',12,188)
+Action : Reduce rule [switch_case -> case_label statements] with [None,None] and goto state 252
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 252
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case . LexToken(CASE,'case',12,188)
+Action : Shift and goto state 250
+
+State  : 250
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case CASE . LexToken(CHAR_CONST,"'t'",12,193)
+Action : Shift and goto state 66
+
+State  : 66
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case CASE CHAR_CONST . LexToken(COLON,':',12,196)
+Action : Reduce rule [literal -> CHAR_CONST] with ["'t'"] and goto state 82
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 82
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case CASE literal . LexToken(COLON,':',12,196)
+Action : Reduce rule [literal_expression -> literal] with [None] and goto state 28
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 28
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case CASE literal_expression . LexToken(COLON,':',12,196)
+Action : Reduce rule [primary_expression -> literal_expression] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case CASE primary_expression . LexToken(COLON,':',12,196)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case CASE postfix_expression . LexToken(COLON,':',12,196)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case CASE prefix_expression . LexToken(COLON,':',12,196)
+Action : Reduce rule [expression -> prefix_expression] with [None] and goto state 111
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 111
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case CASE expression . LexToken(COLON,':',12,196)
+Action : Reduce rule [expression_pattern -> expression] with [None] and goto state 102
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 102
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case CASE expression_pattern . LexToken(COLON,':',12,196)
+Action : Reduce rule [pattern -> expression_pattern] with [None] and goto state 305
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 305
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case CASE pattern . LexToken(COLON,':',12,196)
+Action : Reduce rule [case_item_list -> pattern] with [None] and goto state 306
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 306
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case CASE case_item_list . LexToken(COLON,':',12,196)
+Action : Shift and goto state 348
+
+State  : 348
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case CASE case_item_list COLON . LexToken(CASE,'case',13,206)
+Action : Reduce rule [case_label -> CASE case_item_list COLON] with ['case',None,':'] and goto state 251
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 251
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case case_label . LexToken(CASE,'case',13,206)
+Action : Reduce rule [statements -> <empty>] with [] and goto state 307
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 307
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case case_label statements . LexToken(CASE,'case',13,206)
+Action : Reduce rule [switch_case -> case_label statements] with [None,None] and goto state 252
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 252
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case . LexToken(CASE,'case',13,206)
+Action : Shift and goto state 250
+
+State  : 250
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case CASE . LexToken(CHAR_CONST,"'T'",13,211)
+Action : Shift and goto state 66
+
+State  : 66
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case CASE CHAR_CONST . LexToken(COLON,':',13,214)
+Action : Reduce rule [literal -> CHAR_CONST] with ["'T'"] and goto state 82
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 82
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case CASE literal . LexToken(COLON,':',13,214)
+Action : Reduce rule [literal_expression -> literal] with [None] and goto state 28
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 28
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case CASE literal_expression . LexToken(COLON,':',13,214)
+Action : Reduce rule [primary_expression -> literal_expression] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case CASE primary_expression . LexToken(COLON,':',13,214)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case CASE postfix_expression . LexToken(COLON,':',13,214)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case CASE prefix_expression . LexToken(COLON,':',13,214)
+Action : Reduce rule [expression -> prefix_expression] with [None] and goto state 111
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 111
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case CASE expression . LexToken(COLON,':',13,214)
+Action : Reduce rule [expression_pattern -> expression] with [None] and goto state 102
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 102
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case CASE expression_pattern . LexToken(COLON,':',13,214)
+Action : Reduce rule [pattern -> expression_pattern] with [None] and goto state 305
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 305
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case CASE pattern . LexToken(COLON,':',13,214)
+Action : Reduce rule [case_item_list -> pattern] with [None] and goto state 306
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 306
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case CASE case_item_list . LexToken(COLON,':',13,214)
+Action : Shift and goto state 348
+
+State  : 348
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case CASE case_item_list COLON . LexToken(IDENTIFIER,'tflg',14,228)
+Action : Reduce rule [case_label -> CASE case_item_list COLON] with ['case',None,':'] and goto state 251
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 251
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label . LexToken(IDENTIFIER,'tflg',14,228)
+Action : Shift and goto state 63
+
+State  : 63
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label IDENTIFIER . LexToken(EQUAL,'=',14,233)
+Action : Reduce rule [declaration_identifier -> IDENTIFIER] with ['tflg'] and goto state 23
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 23
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label declaration_identifier . LexToken(EQUAL,'=',14,233)
+Action : Reduce rule [primary_expression -> declaration_identifier] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label primary_expression . LexToken(EQUAL,'=',14,233)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label postfix_expression . LexToken(EQUAL,'=',14,233)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label prefix_expression . LexToken(EQUAL,'=',14,233)
+Action : Shift and goto state 132
+
+State  : 132
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label prefix_expression EQUAL . LexToken(INT_CONST,'1',14,235)
+Action : Reduce rule [operator -> EQUAL] with ['='] and goto state 133
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 133
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label prefix_expression operator . LexToken(INT_CONST,'1',14,235)
+Action : Reduce rule [binary_operator -> operator] with [None] and goto state 140
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 140
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label prefix_expression binary_operator . LexToken(INT_CONST,'1',14,235)
+Action : Shift and goto state 47
+
+State  : 47
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label prefix_expression binary_operator INT_CONST . LexToken(DEFAULT,'default',15,245)
+Action : Reduce rule [literal -> INT_CONST] with ['1'] and goto state 82
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 82
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label prefix_expression binary_operator literal . LexToken(DEFAULT,'default',15,245)
+Action : Reduce rule [literal_expression -> literal] with [None] and goto state 28
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 28
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label prefix_expression binary_operator literal_expression . LexToken(DEFAULT,'default',15,245)
+Action : Reduce rule [primary_expression -> literal_expression] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label prefix_expression binary_operator primary_expression . LexToken(DEFAULT,'default',15,245)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label prefix_expression binary_operator postfix_expression . LexToken(DEFAULT,'default',15,245)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 194
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 194
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label prefix_expression binary_operator prefix_expression . LexToken(DEFAULT,'default',15,245)
+Action : Reduce rule [binary_expression -> binary_operator prefix_expression] with [None,None] and goto state 139
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 139
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label prefix_expression binary_expression . LexToken(DEFAULT,'default',15,245)
+Action : Reduce rule [binary_expression_plus -> binary_expression] with [None] and goto state 134
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 134
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label prefix_expression binary_expression_plus . LexToken(DEFAULT,'default',15,245)
+Action : Reduce rule [binary_expressions -> binary_expression_plus] with [None] and goto state 137
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 137
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label prefix_expression binary_expressions . LexToken(DEFAULT,'default',15,245)
+Action : Reduce rule [expression -> prefix_expression binary_expressions] with [None,None] and goto state 35
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 35
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label expression . LexToken(DEFAULT,'default',15,245)
+Action : Reduce rule [statement -> expression] with [None] and goto state 51
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 51
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label statement . LexToken(DEFAULT,'default',15,245)
+Action : Reduce rule [statements -> <empty>] with [] and goto state 131
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 131
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label statement statements . LexToken(DEFAULT,'default',15,245)
+Action : Reduce rule [statements -> statement statements] with [None,None] and goto state 307
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 307
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case case_label statements . LexToken(DEFAULT,'default',15,245)
+Action : Reduce rule [switch_case -> case_label statements] with [None,None] and goto state 252
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 252
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case . LexToken(DEFAULT,'default',15,245)
+Action : Shift and goto state 254
+
+State  : 254
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case DEFAULT . LexToken(COLON,':',15,253)
+Action : Shift and goto state 309
+
+State  : 309
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case DEFAULT COLON . LexToken(IDENTIFIER,'dflg',16,267)
+Action : Reduce rule [default_label -> DEFAULT COLON] with ['default',':'] and goto state 256
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 256
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label . LexToken(IDENTIFIER,'dflg',16,267)
+Action : Shift and goto state 63
+
+State  : 63
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label IDENTIFIER . LexToken(EQUAL,'=',16,272)
+Action : Reduce rule [declaration_identifier -> IDENTIFIER] with ['dflg'] and goto state 23
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 23
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label declaration_identifier . LexToken(EQUAL,'=',16,272)
+Action : Reduce rule [primary_expression -> declaration_identifier] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label primary_expression . LexToken(EQUAL,'=',16,272)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label postfix_expression . LexToken(EQUAL,'=',16,272)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label prefix_expression . LexToken(EQUAL,'=',16,272)
+Action : Shift and goto state 132
+
+State  : 132
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label prefix_expression EQUAL . LexToken(INT_CONST,'1',16,274)
+Action : Reduce rule [operator -> EQUAL] with ['='] and goto state 133
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 133
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label prefix_expression operator . LexToken(INT_CONST,'1',16,274)
+Action : Reduce rule [binary_operator -> operator] with [None] and goto state 140
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 140
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label prefix_expression binary_operator . LexToken(INT_CONST,'1',16,274)
+Action : Shift and goto state 47
+
+State  : 47
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label prefix_expression binary_operator INT_CONST . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [literal -> INT_CONST] with ['1'] and goto state 82
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 82
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label prefix_expression binary_operator literal . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [literal_expression -> literal] with [None] and goto state 28
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 28
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label prefix_expression binary_operator literal_expression . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [primary_expression -> literal_expression] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label prefix_expression binary_operator primary_expression . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label prefix_expression binary_operator postfix_expression . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 194
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 194
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label prefix_expression binary_operator prefix_expression . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [binary_expression -> binary_operator prefix_expression] with [None,None] and goto state 139
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 139
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label prefix_expression binary_expression . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [binary_expression_plus -> binary_expression] with [None] and goto state 134
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 134
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label prefix_expression binary_expression_plus . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [binary_expressions -> binary_expression_plus] with [None] and goto state 137
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 137
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label prefix_expression binary_expressions . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [expression -> prefix_expression binary_expressions] with [None,None] and goto state 35
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 35
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label expression . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [statement -> expression] with [None] and goto state 51
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 51
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label statement . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [statements -> <empty>] with [] and goto state 131
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 131
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label statement statements . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [statements -> statement statements] with [None,None] and goto state 311
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 311
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case default_label statements . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [switch_case -> default_label statements] with [None,None] and goto state 252
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 252
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case switch_case . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [switch_cases -> switch_case] with [None] and goto state 308
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 308
+Defaulted state 308: Reduce using 41
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_case switch_cases . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [switch_cases -> switch_case switch_cases] with [None,None] and goto state 308
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 308
+Defaulted state 308: Reduce using 41
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_case switch_cases . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [switch_cases -> switch_case switch_cases] with [None,None] and goto state 308
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 308
+Defaulted state 308: Reduce using 41
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_case switch_cases . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [switch_cases -> switch_case switch_cases] with [None,None] and goto state 308
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 308
+Defaulted state 308: Reduce using 41
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_case switch_cases . LexToken(RCURLY,'}',17,280)
+Action : Reduce rule [switch_cases -> switch_case switch_cases] with [None,None] and goto state 255
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 255
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_cases . LexToken(RCURLY,'}',17,280)
+Action : Shift and goto state 310
+
+State  : 310
+Stack  : statement statement statement statement SWITCH expression LCURLY switch_cases RCURLY . LexToken(RETURN,'return',18,286)
+Action : Reduce rule [switch_statement -> SWITCH expression LCURLY switch_cases RCURLY] with ['switch',None,'{',None,'}'] and goto state 21
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 21
+Stack  : statement statement statement statement switch_statement . LexToken(RETURN,'return',18,286)
+Action : Reduce rule [branch_statement -> switch_statement] with [None] and goto state 44
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 44
+Stack  : statement statement statement statement branch_statement . LexToken(RETURN,'return',18,286)
+Action : Reduce rule [statement -> branch_statement] with [None] and goto state 51
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 51
+Stack  : statement statement statement statement statement . LexToken(RETURN,'return',18,286)
+Action : Shift and goto state 16
+
+State  : 16
+Stack  : statement statement statement statement statement RETURN . LexToken(INT_CONST,'0',18,293)
+Action : Shift and goto state 47
+
+State  : 47
+Stack  : statement statement statement statement statement RETURN INT_CONST . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [literal -> INT_CONST] with ['0'] and goto state 82
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 82
+Stack  : statement statement statement statement statement RETURN literal . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [literal_expression -> literal] with [None] and goto state 28
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 28
+Stack  : statement statement statement statement statement RETURN literal_expression . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [primary_expression -> literal_expression] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement statement statement statement statement RETURN primary_expression . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement statement statement statement statement RETURN postfix_expression . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : statement statement statement statement statement RETURN prefix_expression . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [expression -> prefix_expression] with [None] and goto state 100
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 100
+Stack  : statement statement statement statement statement RETURN expression . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [return_statement -> RETURN expression] with ['return',None] and goto state 77
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 77
+Stack  : statement statement statement statement statement return_statement . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [control_transfer_statement -> return_statement] with [None] and goto state 87
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 87
+Stack  : statement statement statement statement statement control_transfer_statement . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [statement -> control_transfer_statement] with [None] and goto state 51
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 51
+Stack  : statement statement statement statement statement statement . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [statements -> <empty>] with [] and goto state 131
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 131
+Stack  : statement statement statement statement statement statement statements . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [statements -> statement statements] with [None,None] and goto state 131
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 131
+Stack  : statement statement statement statement statement statements . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [statements -> statement statements] with [None,None] and goto state 131
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 131
+Stack  : statement statement statement statement statements . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [statements -> statement statements] with [None,None] and goto state 131
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 131
+Stack  : statement statement statement statements . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [statements -> statement statements] with [None,None] and goto state 131
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 131
+Stack  : statement statement statements . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [statements -> statement statements] with [None,None] and goto state 131
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 131
+Stack  : statement statements . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [statements -> statement statements] with [None,None] and goto state 39
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 39
+Defaulted state 39: Reduce using 1
+Stack  : statements . LexToken(RCURLY,'}',19,295)
+Action : Reduce rule [start -> statements] with [None] and goto state 49
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 49
+Stack  : start . LexToken(RCURLY,'}',19,295)
+ERROR: Error  : start . LexToken(RCURLY,'}',19,295)
+
+State  : 49
+Stack  : start . error
+ERROR: Error  : start . error
+
+State  : 0
+Stack  : . error
+ERROR: Error  : . error
+
+State  : 0
+Stack  : . $end
+Action : Reduce rule [statements -> <empty>] with [] and goto state 39
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 39
+Defaulted state 39: Reduce using 1
+Stack  : statements . $end
+Action : Reduce rule [start -> statements] with [None] and goto state 49
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 49
+Stack  : start . $end
+Done   : Returning <NoneType @ 0x8fd4d0> (None)
+PLY: PARSE DEBUG END
