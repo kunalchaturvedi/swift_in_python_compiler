@@ -1,0 +1,67 @@
+<p>Non-terminal being expanded >> <b>BOLD</b>. </p><p> Derived expansion >> <u>UNDERLINE</u>.</p><p> tokens >> UPPER CASE.</p><p> Derived expansion >> lower case.</p><p><u><b>start</b></u></p>
+<p><u><b>statements</b></u></p>
+<p><u>statement <b>statements</b></u></p>
+<p>statement <u>statement <b>statements</b></u></p>
+<p>statement statement <u>statement <b>statements</b></u></p>
+<p>statement statement statement <u>statement <b>statements</b></u></p>
+<p>statement statement statement <b>statement</b> <u><empty></u></p>
+<p>statement statement statement <u><b>declaration</b></u> <empty></p>
+<p>statement statement statement <u><b>variable_declaration</b></u> <empty></p>
+<p>statement statement statement <u>variable_declaration_head <b>pattern_initializer_list</b></u> <empty></p>
+<p>statement statement statement variable_declaration_head <u>pattern_initializer <b>p_com_pat_init_star</b></u> <empty></p>
+<p>statement statement statement variable_declaration_head <b>pattern_initializer</b> <u><empty></u> <empty></p>
+<p>statement statement statement variable_declaration_head <u><b>pattern</b></u> <empty> <empty></p>
+<p>statement statement statement variable_declaration_head <u><b>identifier_pattern</b></u> <empty> <empty></p>
+<p>statement statement statement variable_declaration_head <u><b>declaration_identifier</b></u> <empty> <empty></p>
+<p>statement statement statement <b>variable_declaration_head</b> <u>IDENTIFIER</u> <empty> <empty></p>
+<p>statement statement <b>statement</b> <u>VAR</u> IDENTIFIER <empty> <empty></p>
+<p>statement statement <u><b>declaration</b></u> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement <u><b>variable_declaration</b></u> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement <u>variable_declaration_head <b>pattern_initializer_list</b></u> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement variable_declaration_head <u>pattern_initializer <b>p_com_pat_init_star</b></u> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement variable_declaration_head <b>pattern_initializer</b> <u><empty></u> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement variable_declaration_head <u>pattern <b>initializer</b></u> <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement variable_declaration_head pattern <u>EQUAL <b>expression</b></u> <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement variable_declaration_head pattern EQUAL <u><b>prefix_expression</b></u> <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement variable_declaration_head pattern EQUAL <u><b>postfix_expression</b></u> <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement variable_declaration_head pattern EQUAL <u><b>primary_expression</b></u> <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement variable_declaration_head pattern EQUAL <u><b>literal_expression</b></u> <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement variable_declaration_head pattern EQUAL <u><b>literal</b></u> <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement variable_declaration_head <b>pattern</b> EQUAL <u>INT_CONST</u> <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement variable_declaration_head <u><b>identifier_pattern</b></u> EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement variable_declaration_head <u><b>declaration_identifier</b></u> EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement statement <b>variable_declaration_head</b> <u>IDENTIFIER</u> EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement <b>statement</b> <u>VAR</u> IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement <u><b>declaration</b></u> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement <u><b>variable_declaration</b></u> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement <u>variable_declaration_head <b>pattern_initializer_list</b></u> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement variable_declaration_head <u>pattern_initializer <b>p_com_pat_init_star</b></u> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement variable_declaration_head <b>pattern_initializer</b> <u><empty></u> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement variable_declaration_head <u>pattern <b>initializer</b></u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement variable_declaration_head pattern <u>EQUAL <b>expression</b></u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement variable_declaration_head pattern EQUAL <u><b>prefix_expression</b></u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement variable_declaration_head pattern EQUAL <u><b>postfix_expression</b></u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement variable_declaration_head pattern EQUAL <u><b>primary_expression</b></u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement variable_declaration_head pattern EQUAL <u><b>literal_expression</b></u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement variable_declaration_head pattern EQUAL <u><b>literal</b></u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement variable_declaration_head <b>pattern</b> EQUAL <u>INT_CONST</u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement variable_declaration_head <u><b>identifier_pattern</b></u> EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement variable_declaration_head <u><b>declaration_identifier</b></u> EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>statement <b>variable_declaration_head</b> <u>IDENTIFIER</u> EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p><b>statement</b> <u>VAR</u> IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p><u><b>declaration</b></u> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p><u><b>variable_declaration</b></u> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p><u>variable_declaration_head <b>pattern_initializer_list</b></u> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>variable_declaration_head <u>pattern_initializer <b>p_com_pat_init_star</b></u> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>variable_declaration_head <b>pattern_initializer</b> <u><empty></u> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>variable_declaration_head <u>pattern <b>initializer</b></u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>variable_declaration_head pattern <u>EQUAL <b>expression</b></u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>variable_declaration_head pattern EQUAL <u><b>prefix_expression</b></u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>variable_declaration_head pattern EQUAL <u><b>postfix_expression</b></u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>variable_declaration_head pattern EQUAL <u><b>primary_expression</b></u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>variable_declaration_head pattern EQUAL <u><b>literal_expression</b></u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>variable_declaration_head pattern EQUAL <u><b>literal</b></u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>variable_declaration_head <b>pattern</b> EQUAL <u>INT_CONST</u> <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>variable_declaration_head <u><b>identifier_pattern</b></u> EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p>variable_declaration_head <u><b>declaration_identifier</b></u> EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>
+<p><b>variable_declaration_head</b> <u>IDENTIFIER</u> EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER EQUAL INT_CONST <empty> VAR IDENTIFIER <empty> <empty></p>

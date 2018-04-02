@@ -1,0 +1,398 @@
+PLY: PARSE DEBUG START
+
+State  : 0
+Stack  : . LexToken(VAR,'var',1,0)
+Action : Shift and goto state 12
+
+State  : 12
+Stack  : VAR . LexToken(IDENTIFIER,'wflg',1,4)
+Action : Reduce rule [variable_declaration_head -> VAR] with ['var'] and goto state 19
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 19
+Stack  : variable_declaration_head . LexToken(IDENTIFIER,'wflg',1,4)
+Action : Shift and goto state 63
+
+State  : 63
+Stack  : variable_declaration_head IDENTIFIER . LexToken(EQUAL,'=',1,9)
+Action : Reduce rule [declaration_identifier -> IDENTIFIER] with ['wflg'] and goto state 105
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 105
+Stack  : variable_declaration_head declaration_identifier . LexToken(EQUAL,'=',1,9)
+Action : Reduce rule [identifier_pattern -> declaration_identifier] with [None] and goto state 107
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 107
+Stack  : variable_declaration_head identifier_pattern . LexToken(EQUAL,'=',1,9)
+Action : Reduce rule [pattern -> identifier_pattern] with [None] and goto state 101
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 101
+Stack  : variable_declaration_head pattern . LexToken(EQUAL,'=',1,9)
+Action : Shift and goto state 159
+
+State  : 159
+Stack  : variable_declaration_head pattern EQUAL . LexToken(INT_CONST,'0',1,11)
+Action : Shift and goto state 47
+
+State  : 47
+Stack  : variable_declaration_head pattern EQUAL INT_CONST . LexToken(VAR,'var',2,13)
+Action : Reduce rule [literal -> INT_CONST] with ['0'] and goto state 82
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 82
+Stack  : variable_declaration_head pattern EQUAL literal . LexToken(VAR,'var',2,13)
+Action : Reduce rule [literal_expression -> literal] with [None] and goto state 28
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 28
+Stack  : variable_declaration_head pattern EQUAL literal_expression . LexToken(VAR,'var',2,13)
+Action : Reduce rule [primary_expression -> literal_expression] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : variable_declaration_head pattern EQUAL primary_expression . LexToken(VAR,'var',2,13)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : variable_declaration_head pattern EQUAL postfix_expression . LexToken(VAR,'var',2,13)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : variable_declaration_head pattern EQUAL prefix_expression . LexToken(VAR,'var',2,13)
+Action : Reduce rule [expression -> prefix_expression] with [None] and goto state 219
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 219
+Stack  : variable_declaration_head pattern EQUAL expression . LexToken(VAR,'var',2,13)
+Action : Reduce rule [initializer -> EQUAL expression] with ['=',None] and goto state 160
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 160
+Stack  : variable_declaration_head pattern initializer . LexToken(VAR,'var',2,13)
+Action : Reduce rule [pattern_initializer -> pattern initializer] with [None,None] and goto state 106
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 106
+Stack  : variable_declaration_head pattern_initializer . LexToken(VAR,'var',2,13)
+Action : Reduce rule [p_com_pat_init_star -> <empty>] with [] and goto state 164
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 164
+Stack  : variable_declaration_head pattern_initializer p_com_pat_init_star . LexToken(VAR,'var',2,13)
+Action : Reduce rule [pattern_initializer_list -> pattern_initializer p_com_pat_init_star] with [None,None] and goto state 103
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 103
+Stack  : variable_declaration_head pattern_initializer_list . LexToken(VAR,'var',2,13)
+Action : Reduce rule [variable_declaration -> variable_declaration_head pattern_initializer_list] with [None,None] and goto state 45
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 45
+Stack  : variable_declaration . LexToken(VAR,'var',2,13)
+Action : Reduce rule [declaration -> variable_declaration] with [None] and goto state 59
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 59
+Stack  : declaration . LexToken(VAR,'var',2,13)
+Action : Reduce rule [statement -> declaration] with [None] and goto state 51
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 51
+Stack  : statement . LexToken(VAR,'var',2,13)
+Action : Shift and goto state 12
+
+State  : 12
+Stack  : statement VAR . LexToken(IDENTIFIER,'tflg',2,17)
+Action : Reduce rule [variable_declaration_head -> VAR] with ['var'] and goto state 19
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 19
+Stack  : statement variable_declaration_head . LexToken(IDENTIFIER,'tflg',2,17)
+Action : Shift and goto state 63
+
+State  : 63
+Stack  : statement variable_declaration_head IDENTIFIER . LexToken(EQUAL,'=',2,22)
+Action : Reduce rule [declaration_identifier -> IDENTIFIER] with ['tflg'] and goto state 105
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 105
+Stack  : statement variable_declaration_head declaration_identifier . LexToken(EQUAL,'=',2,22)
+Action : Reduce rule [identifier_pattern -> declaration_identifier] with [None] and goto state 107
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 107
+Stack  : statement variable_declaration_head identifier_pattern . LexToken(EQUAL,'=',2,22)
+Action : Reduce rule [pattern -> identifier_pattern] with [None] and goto state 101
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 101
+Stack  : statement variable_declaration_head pattern . LexToken(EQUAL,'=',2,22)
+Action : Shift and goto state 159
+
+State  : 159
+Stack  : statement variable_declaration_head pattern EQUAL . LexToken(INT_CONST,'0',2,24)
+Action : Shift and goto state 47
+
+State  : 47
+Stack  : statement variable_declaration_head pattern EQUAL INT_CONST . LexToken(VAR,'var',3,26)
+Action : Reduce rule [literal -> INT_CONST] with ['0'] and goto state 82
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 82
+Stack  : statement variable_declaration_head pattern EQUAL literal . LexToken(VAR,'var',3,26)
+Action : Reduce rule [literal_expression -> literal] with [None] and goto state 28
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 28
+Stack  : statement variable_declaration_head pattern EQUAL literal_expression . LexToken(VAR,'var',3,26)
+Action : Reduce rule [primary_expression -> literal_expression] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement variable_declaration_head pattern EQUAL primary_expression . LexToken(VAR,'var',3,26)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement variable_declaration_head pattern EQUAL postfix_expression . LexToken(VAR,'var',3,26)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : statement variable_declaration_head pattern EQUAL prefix_expression . LexToken(VAR,'var',3,26)
+Action : Reduce rule [expression -> prefix_expression] with [None] and goto state 219
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 219
+Stack  : statement variable_declaration_head pattern EQUAL expression . LexToken(VAR,'var',3,26)
+Action : Reduce rule [initializer -> EQUAL expression] with ['=',None] and goto state 160
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 160
+Stack  : statement variable_declaration_head pattern initializer . LexToken(VAR,'var',3,26)
+Action : Reduce rule [pattern_initializer -> pattern initializer] with [None,None] and goto state 106
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 106
+Stack  : statement variable_declaration_head pattern_initializer . LexToken(VAR,'var',3,26)
+Action : Reduce rule [p_com_pat_init_star -> <empty>] with [] and goto state 164
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 164
+Stack  : statement variable_declaration_head pattern_initializer p_com_pat_init_star . LexToken(VAR,'var',3,26)
+Action : Reduce rule [pattern_initializer_list -> pattern_initializer p_com_pat_init_star] with [None,None] and goto state 103
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 103
+Stack  : statement variable_declaration_head pattern_initializer_list . LexToken(VAR,'var',3,26)
+Action : Reduce rule [variable_declaration -> variable_declaration_head pattern_initializer_list] with [None,None] and goto state 45
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 45
+Stack  : statement variable_declaration . LexToken(VAR,'var',3,26)
+Action : Reduce rule [declaration -> variable_declaration] with [None] and goto state 59
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 59
+Stack  : statement declaration . LexToken(VAR,'var',3,26)
+Action : Reduce rule [statement -> declaration] with [None] and goto state 51
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 51
+Stack  : statement statement . LexToken(VAR,'var',3,26)
+Action : Shift and goto state 12
+
+State  : 12
+Stack  : statement statement VAR . LexToken(IDENTIFIER,'dflg',3,30)
+Action : Reduce rule [variable_declaration_head -> VAR] with ['var'] and goto state 19
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 19
+Stack  : statement statement variable_declaration_head . LexToken(IDENTIFIER,'dflg',3,30)
+Action : Shift and goto state 63
+
+State  : 63
+Stack  : statement statement variable_declaration_head IDENTIFIER . LexToken(EQUAL,'=',3,35)
+Action : Reduce rule [declaration_identifier -> IDENTIFIER] with ['dflg'] and goto state 105
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 105
+Stack  : statement statement variable_declaration_head declaration_identifier . LexToken(EQUAL,'=',3,35)
+Action : Reduce rule [identifier_pattern -> declaration_identifier] with [None] and goto state 107
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 107
+Stack  : statement statement variable_declaration_head identifier_pattern . LexToken(EQUAL,'=',3,35)
+Action : Reduce rule [pattern -> identifier_pattern] with [None] and goto state 101
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 101
+Stack  : statement statement variable_declaration_head pattern . LexToken(EQUAL,'=',3,35)
+Action : Shift and goto state 159
+
+State  : 159
+Stack  : statement statement variable_declaration_head pattern EQUAL . LexToken(INT_CONST,'0',3,37)
+Action : Shift and goto state 47
+
+State  : 47
+Stack  : statement statement variable_declaration_head pattern EQUAL INT_CONST . LexToken(VAR,'var',4,39)
+Action : Reduce rule [literal -> INT_CONST] with ['0'] and goto state 82
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 82
+Stack  : statement statement variable_declaration_head pattern EQUAL literal . LexToken(VAR,'var',4,39)
+Action : Reduce rule [literal_expression -> literal] with [None] and goto state 28
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 28
+Stack  : statement statement variable_declaration_head pattern EQUAL literal_expression . LexToken(VAR,'var',4,39)
+Action : Reduce rule [primary_expression -> literal_expression] with [None] and goto state 58
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 58
+Stack  : statement statement variable_declaration_head pattern EQUAL primary_expression . LexToken(VAR,'var',4,39)
+Action : Reduce rule [postfix_expression -> primary_expression] with [None] and goto state 76
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 76
+Stack  : statement statement variable_declaration_head pattern EQUAL postfix_expression . LexToken(VAR,'var',4,39)
+Action : Reduce rule [prefix_expression -> postfix_expression] with [None] and goto state 64
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 64
+Stack  : statement statement variable_declaration_head pattern EQUAL prefix_expression . LexToken(VAR,'var',4,39)
+Action : Reduce rule [expression -> prefix_expression] with [None] and goto state 219
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 219
+Stack  : statement statement variable_declaration_head pattern EQUAL expression . LexToken(VAR,'var',4,39)
+Action : Reduce rule [initializer -> EQUAL expression] with ['=',None] and goto state 160
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 160
+Stack  : statement statement variable_declaration_head pattern initializer . LexToken(VAR,'var',4,39)
+Action : Reduce rule [pattern_initializer -> pattern initializer] with [None,None] and goto state 106
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 106
+Stack  : statement statement variable_declaration_head pattern_initializer . LexToken(VAR,'var',4,39)
+Action : Reduce rule [p_com_pat_init_star -> <empty>] with [] and goto state 164
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 164
+Stack  : statement statement variable_declaration_head pattern_initializer p_com_pat_init_star . LexToken(VAR,'var',4,39)
+Action : Reduce rule [pattern_initializer_list -> pattern_initializer p_com_pat_init_star] with [None,None] and goto state 103
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 103
+Stack  : statement statement variable_declaration_head pattern_initializer_list . LexToken(VAR,'var',4,39)
+Action : Reduce rule [variable_declaration -> variable_declaration_head pattern_initializer_list] with [None,None] and goto state 45
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 45
+Stack  : statement statement variable_declaration . LexToken(VAR,'var',4,39)
+Action : Reduce rule [declaration -> variable_declaration] with [None] and goto state 59
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 59
+Stack  : statement statement declaration . LexToken(VAR,'var',4,39)
+Action : Reduce rule [statement -> declaration] with [None] and goto state 51
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 51
+Stack  : statement statement statement . LexToken(VAR,'var',4,39)
+Action : Shift and goto state 12
+
+State  : 12
+Stack  : statement statement statement VAR . LexToken(IDENTIFIER,'c',4,43)
+Action : Reduce rule [variable_declaration_head -> VAR] with ['var'] and goto state 19
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 19
+Stack  : statement statement statement variable_declaration_head . LexToken(IDENTIFIER,'c',4,43)
+Action : Shift and goto state 63
+
+State  : 63
+Stack  : statement statement statement variable_declaration_head IDENTIFIER . $end
+Action : Reduce rule [declaration_identifier -> IDENTIFIER] with ['c'] and goto state 105
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 105
+Stack  : statement statement statement variable_declaration_head declaration_identifier . $end
+Action : Reduce rule [identifier_pattern -> declaration_identifier] with [None] and goto state 107
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 107
+Stack  : statement statement statement variable_declaration_head identifier_pattern . $end
+Action : Reduce rule [pattern -> identifier_pattern] with [None] and goto state 101
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 101
+Stack  : statement statement statement variable_declaration_head pattern . $end
+Action : Reduce rule [pattern_initializer -> pattern] with [None] and goto state 106
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 106
+Stack  : statement statement statement variable_declaration_head pattern_initializer . $end
+Action : Reduce rule [p_com_pat_init_star -> <empty>] with [] and goto state 164
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 164
+Stack  : statement statement statement variable_declaration_head pattern_initializer p_com_pat_init_star . $end
+Action : Reduce rule [pattern_initializer_list -> pattern_initializer p_com_pat_init_star] with [None,None] and goto state 103
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 103
+Stack  : statement statement statement variable_declaration_head pattern_initializer_list . $end
+Action : Reduce rule [variable_declaration -> variable_declaration_head pattern_initializer_list] with [None,None] and goto state 45
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 45
+Stack  : statement statement statement variable_declaration . $end
+Action : Reduce rule [declaration -> variable_declaration] with [None] and goto state 59
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 59
+Stack  : statement statement statement declaration . $end
+Action : Reduce rule [statement -> declaration] with [None] and goto state 51
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 51
+Stack  : statement statement statement statement . $end
+Action : Reduce rule [statements -> <empty>] with [] and goto state 131
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 131
+Stack  : statement statement statement statement statements . $end
+Action : Reduce rule [statements -> statement statements] with [None,None] and goto state 131
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 131
+Stack  : statement statement statement statements . $end
+Action : Reduce rule [statements -> statement statements] with [None,None] and goto state 131
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 131
+Stack  : statement statement statements . $end
+Action : Reduce rule [statements -> statement statements] with [None,None] and goto state 131
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 131
+Stack  : statement statements . $end
+Action : Reduce rule [statements -> statement statements] with [None,None] and goto state 39
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 39
+Defaulted state 39: Reduce using 1
+Stack  : statements . $end
+Action : Reduce rule [start -> statements] with [None] and goto state 49
+Result : <NoneType @ 0x8fd4d0> (None)
+
+State  : 49
+Stack  : start . $end
+Done   : Returning <NoneType @ 0x8fd4d0> (None)
+PLY: PARSE DEBUG END
