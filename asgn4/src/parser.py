@@ -2,7 +2,13 @@ import sys
 import ply.yacc as yacc
 from lexer import *
 
+import symtab
+import tac
 import sys
+from copy import deepcopy
+
+
+symbol_table = symtab.environment()
 
 
 # Precedence and associativity of operators
@@ -17,42 +23,62 @@ precedence = (
 	('right', 'TILDE')
 )
 
-#  Statements 
+#  Statements
 
 def p_start(p):
-   'start : statements'
-   p[0]=p[1]
-   print("hello")
+	'start : statements'
+	p[0] = p[1]
+	print("PARSING DONE !!!")
+	print("----------------------------------------------------------------------")
+	print("SYMBOL TABLE")
+	print("----------------------------------------------------------------------")
+	symbol_table.print_symbol_table(symtab.base_table)
+	print("")
+	print("----------------------------------------------------------------------")
+	print("THREE ADDRESS CODE")
+	print("----------------------------------------------------------------------")
+	tac.print_tac(p[0])
+	print("")
 
 def p_statements(p):
 	"""
 	statements : statement statements
 	|
 	"""
-
+	if len(p)==1:
+		p[0] = {'code':[''], 'value':None}
+	elif len(p)==3:
+		p[0] = deepcopy(p[2])
+		p[0]['code'] +=p[1]['code']
+		p[0]['value'] = None
 
 
 def p_statement(p):
-	"""statement : expression 
-		| declaration 
-		| loop_statement 
-		| branch_statement 
+	"""statement : expression
+		| declaration
+		| loop_statement
+		| branch_statement
 		| control_transfer_statement
 		| print_statement
 		"""
-	p[0]=p[1]
+	p[0]=deepcopy(p[1])
 
 
 def p_print_statement(p):
 	"""
 	print_statement : PRINT LPAREN print_arg_list RPAREN
 	"""
+	p[0] = {'code':[], 'value':None}
+	p[0]['code'] += ['print, ' + p[3]['value']]
 
 def p_print_arg_list(p):
 	"""
 	print_arg_list : print_arg COMMA print_arg_list
 	 | print_arg
 	"""
+	if len(p)==2:
+		p[0]=deepcopy(p[1])
+
 
 def p_print_arg(p):
 	"""
@@ -60,10 +86,12 @@ def p_print_arg(p):
 	| literal
 	| expression
 	"""
+	p[0]=deepcopy(p[1])
+
 
 def p_loop_statement(p):
 	"""
-	loop_statement : for_statement 
+	loop_statement : for_statement
 	| while_statement
 	| repeat_while_statement
 	"""
@@ -71,10 +99,10 @@ def p_loop_statement(p):
 def p_for_statement(p):
 	"""
 	for_statement : FOR LPAREN for_init SEMICOLON expression SEMICOLON expression RPAREN code_block
-	"""	
+	"""
 def p_for_init(p):
 	"""
-	for_init : variable_declaration 
+	for_init : variable_declaration
 	| expression_list
 	"""
 
@@ -99,7 +127,7 @@ def p_condition(p):
 	condition : expression
  	| case_condition
  	| optional_binding_condition
-	
+
 	"""
 
 def p_case_condition(p):
@@ -117,7 +145,7 @@ def p_optional_binding_condition(p):
 
 def p_repeat_while_statement(p):
 	"""
-	repeat_while_statement : REPEAT code_block WHILE expression 
+	repeat_while_statement : REPEAT code_block WHILE expression
 	"""
 
 def p_branch_statement(p):
@@ -128,12 +156,12 @@ def p_branch_statement(p):
 
 def p_if_statement(p):
 	"""
-	if_statement : IF condition_list code_block else_clause 
+	if_statement : IF condition_list code_block else_clause
 	| IF condition_list code_block
 	"""
 def p_else_clause(p):
 	"""
-	else_clause : ELSE code_block 
+	else_clause : ELSE code_block
 	| ELSE if_statement
 	"""
 
@@ -146,12 +174,12 @@ def p_switch_statement(p):
 def p_switch_cases(p):
 	"""
 	switch_cases : switch_case switch_cases
-	| switch_case 
+	| switch_case
 	"""
 
 def p_switch_case(p):
 	"""
-	switch_case : case_label statements 
+	switch_case : case_label statements
 	| default_label statements
 	"""
 
@@ -163,7 +191,7 @@ def p_case_label(p):
 def p_case_item_list(p):
 	"""
 	case_item_list : pattern where_clause
-	| pattern 
+	| pattern
 	| pattern where_clause COMMA case_item_list
 	| pattern COMMA case_item_list
 	"""
@@ -171,7 +199,7 @@ def p_case_item_list(p):
 def p_default_label(p):
 	"""
 	default_label : DEFAULT COLON
-	""" 
+	"""
 
 def p_where_clause(p):
 	"""
@@ -220,13 +248,13 @@ def p_declaration(p):
 	| struct_declaration
 	| operator_declaration
 	"""
-# declarations : declaration+ 
+# declarations : declaration+
 
 # GRAMMAR OF A TOP-LEVEL DECLARATION
 def p_top_level_declaration(p):
 	"""
 	top_level_declaration : statements
-	| 
+	|
 	"""
 
 # GRAMMAR OF A CODE BLOCK
@@ -245,14 +273,14 @@ def p_import_declaration(p):
 
 def p_import_kind(p):
 	"""
-	import_kind : TYPEALIAS 
-	| STRUCT 
-	| VAR 
-	| FUNC  
+	import_kind : TYPEALIAS
+	| STRUCT
+	| VAR
+	| FUNC
 	"""
-	# | 'class' 
-	# | 'enum' 
-	# | 'protocol' 
+	# | 'class'
+	# | 'enum'
+	# | 'protocol'
 
 
 def p_import_path(p):
@@ -268,8 +296,8 @@ def p_dot_import_path_identifier(p): #*
 
 def p_import_path_identifier(p):
 	"""
-	import_path_identifier : declaration_identifier 
-	| operator  
+	import_path_identifier : declaration_identifier
+	| operator
 	"""
 
 # // GRAMMAR OF A CONSTANT DECLARATION
@@ -304,7 +332,7 @@ def p_pattern_initializer(p):
 
 def p_initializer(p):
 	"""
-	initializer : EQUAL expression  
+	initializer : EQUAL expression
 	"""
 
 # // GRAMMAR OF A VARIABLE DECLARATION //-----------------//
@@ -314,7 +342,7 @@ def p_variable_declaration(p):
 	variable_declaration : variable_declaration_head variable_name type_annotation code_block
 	| variable_declaration_head variable_name type_annotation initializer
 	| variable_declaration_head pattern_initializer_list
-	
+
 	"""
 	# | variable_declaration_head variable_name type_annotation getter_setter_block
 	# | variable_declaration_head variable_name type_annotation getter_setter_keyword_block
@@ -323,7 +351,7 @@ def p_variable_declaration(p):
 
 def p_variable_declaration_head(p):
 	"""
-	variable_declaration_head : VAR    
+	variable_declaration_head : VAR
 	"""
 # declaration_modifiers VAR
 
@@ -331,21 +359,21 @@ def p_variable_declaration_head(p):
 
 def p_variable_name(p):
 	"""
-	variable_name : declaration_identifier  
+	variable_name : declaration_identifier
 	"""
 
-# getter_setter_block : LCURLY getter_clause setter_clause?RCURLY  | LCURLY setter_clause getter_clause RCURLY  
-# getter_clause : /*attributes?*/ mutation_modifier? 'get' code_block  
-# setter_clause : /*attributes?*/ mutation_modifier? 'set' setter_name? code_block  
-# setter_name : LPAREN declaration_identifier RPAREN  
+# getter_setter_block : LCURLY getter_clause setter_clause?RCURLY  | LCURLY setter_clause getter_clause RCURLY
+# getter_clause : /*attributes?*/ mutation_modifier? 'get' code_block
+# setter_clause : /*attributes?*/ mutation_modifier? 'set' setter_name? code_block
+# setter_name : LPAREN declaration_identifier RPAREN
 
-# getter_setter_keyword_block : LCURLY getter_keyword_clause setter_keyword_clause?RCURLY | LCURLY setter_keyword_clause getter_keyword_clause RCURLY  
-# getter_keyword_clause : /*attributes?*/ mutation_modifier? 'get'  
-# setter_keyword_clause : /*attributes?*/ mutation_modifier? 'set'  
+# getter_setter_keyword_block : LCURLY getter_keyword_clause setter_keyword_clause?RCURLY | LCURLY setter_keyword_clause getter_keyword_clause RCURLY
+# getter_keyword_clause : /*attributes?*/ mutation_modifier? 'get'
+# setter_keyword_clause : /*attributes?*/ mutation_modifier? 'set'
 
-# willSet_didSet_block : LCURLY willSet_clause didSet_clause?RCURLY | LCURLY didSet_clause willSet_clause RCURLY  
-# willSet_clause : /*attributes?*/ 'willSet' setter_name? code_block  
-# didSet_clause : /*attributes?*/ 'didSet' setter_name? code_block  
+# willSet_didSet_block : LCURLY willSet_clause didSet_clause?RCURLY | LCURLY didSet_clause willSet_clause RCURLY
+# willSet_clause : /*attributes?*/ 'willSet' setter_name? code_block
+# didSet_clause : /*attributes?*/ 'didSet' setter_name? code_block
 
 
 
@@ -353,7 +381,7 @@ def p_variable_name(p):
 def p_function_declaration(p):
 	"""
 	function_declaration : function_head function_name function_signature function_body
-	| function_head function_name function_signature 
+	| function_head function_name function_signature
 	"""
 
 def p_function_head(p):
@@ -365,40 +393,40 @@ def p_function_head(p):
 
 def p_function_name(p):
 	"""
-	function_name : declaration_identifier 
-	| operator 
+	function_name : declaration_identifier
+	| operator
 	"""
 
 def p_function_signature(p):
 	"""
 	function_signature : parameter_clause THROWS function_result
-	| parameter_clause 
-	| parameter_clause THROWS 
+	| parameter_clause
+	| parameter_clause THROWS
 	| parameter_clause function_result
 	| parameter_clause RETHROWS function_result
 	| parameter_clause RETHROWS
-	
+
 	"""
 
 def p_function_result(p):
 	"""
-	function_result : ARROW type 
+	function_result : ARROW type
 	"""
 
 def p_function_body(p):
 	"""
-	function_body : code_block 
+	function_body : code_block
 	"""
 
 def p_parameter_clause(p):
 	"""
-	parameter_clause : LPAREN RPAREN 
-	|  LPAREN parameter_list RPAREN  
+	parameter_clause : LPAREN RPAREN
+	|  LPAREN parameter_list RPAREN
 	"""
 
 def p_parameter_list(p):
 	"""
-	parameter_list : parameter commapar  
+	parameter_list : parameter commapar
 	"""
 def p_commapar(p): #*
 	"""
@@ -410,44 +438,44 @@ def p_commapar(p): #*
 def p_parameter(p):
 	"""
 	parameter : external_parameter_name local_parameter_name type_annotation default_argument_clause
-	|  local_parameter_name type_annotation 
+	|  local_parameter_name type_annotation
 	|  local_parameter_name type_annotation default_argument_clause
-	| external_parameter_name local_parameter_name type_annotation 
+	| external_parameter_name local_parameter_name type_annotation
 	| external_parameter_name local_parameter_name type_annotation RANGEOP
 	| local_parameter_name type_annotation RANGEOP
-	
+
 	"""
 
 def p_external_parameter_name(p):
 	"""
-	external_parameter_name : label_identifier 
+	external_parameter_name : label_identifier
 	"""
 
 def p_local_parameter_name(p):
 	"""
-	local_parameter_name : label_identifier 
+	local_parameter_name : label_identifier
 	"""
 
 def p_default_argument_clause(p):
 	"""
-	default_argument_clause : EQUAL expression 
+	default_argument_clause : EQUAL expression
 	"""
 
 # // GRAMMAR OF A STRUCTURE DECLARATION todo did not update
 
 def p_struct_declaration(p):
 	"""
-	struct_declaration : STRUCT struct_name struct_body  
+	struct_declaration : STRUCT struct_name struct_body
 	"""
 
 def p_struct_name(p):
 	"""
-	struct_name : declaration_identifier  
+	struct_name : declaration_identifier
 	"""
 
 def p_struct_body(p):
 	"""
-	struct_body : LCURLY struct_member_star RCURLY  
+	struct_body : LCURLY struct_member_star RCURLY
 	"""
 def p_struct_member_star(p): #*
 	"""
@@ -458,31 +486,31 @@ def p_struct_member_star(p): #*
 
 def p_struct_member(p):
 	"""
-	struct_member : declaration 
+	struct_member : declaration
 	"""
 
 # // GRAMMAR OF AN OPERATOR DECLARATION
 
 def p_operator_declaration(p):
 	"""
-	operator_declaration : prefix_operator_declaration 
-	| postfix_operator_declaration 
-	| infix_operator_declaration 
+	operator_declaration : prefix_operator_declaration
+	| postfix_operator_declaration
+	| infix_operator_declaration
 	"""
 
 def p_prefix_operator_declaration(p):
 	"""
-	prefix_operator_declaration : PREFIX OPERATOR operator 
+	prefix_operator_declaration : PREFIX OPERATOR operator
 	"""
 
 def p_postfix_operator_declaration(p):
 	"""
-	postfix_operator_declaration : POSTFIX OPERATOR operator 
+	postfix_operator_declaration : POSTFIX OPERATOR operator
 	"""
 
 def p_infix_operator_declaration(p):
 	"""
-	infix_operator_declaration : INFIX OPERATOR operator 
+	infix_operator_declaration : INFIX OPERATOR operator
 	"""
 
 # // GRAMMAR OF A DECLARATION MODIFIER
@@ -508,7 +536,7 @@ def p_declaration_modifier(p):
 # 	| 'internal' | 'internal' LPAREN 'set' RPAREN
 # 	| 'public' | 'public' LPAREN 'set' RPAREN
 # 	| 'open' | 'open' LPAREN 'set' RPAREN
-	
+
 # 	"""
 
 # // GRAMMAR OF A PATTERN //********danger!!!****** */
@@ -519,12 +547,12 @@ def p_pattern(p):
 	| identifier_pattern
 	| value_binding_pattern
 	| expression_pattern
-	
+
 	"""
 
 def p_identifier_pattern(p):
 	"""
-	identifier_pattern : declaration_identifier 
+	identifier_pattern : declaration_identifier
 	"""
 
 def p_value_binding_pattern(p):
@@ -536,7 +564,7 @@ def p_value_binding_pattern(p):
 
 def p_expression_pattern(p):
 	"""
-	expression_pattern : expression  
+	expression_pattern : expression
 	"""
 
 # // GRAMMAR OF AN EXPRESSION
@@ -549,7 +577,7 @@ def p_expression(p):
 
 def p_expression_list(p):
 	"""
-	expression_list : expression commaexp 
+	expression_list : expression commaexp
 	"""
 def p_commaexp(p): #*
 	"""
@@ -567,7 +595,7 @@ def p_prefix_expression(p):
 
 def p_in_out_expression(p):
 	"""
-	in_out_expression : AND declaration_identifier 
+	in_out_expression : AND declaration_identifier
 	"""
 
 def p_binary_expression(p):
@@ -579,7 +607,7 @@ def p_binary_expression(p):
 
 def p_binary_expressions(p):
 	"""
-	binary_expressions : binary_expression_plus 
+	binary_expressions : binary_expression_plus
 	"""
 def p_binary_expression_plus(p): #+
 	"""
@@ -588,10 +616,10 @@ def p_binary_expression_plus(p): #+
 	"""
 
 
-# correct hai 
+# correct hai
 def p_conditional_operator(p):
 	"""
-	conditional_operator : CONDOP expression COLON 
+	conditional_operator : CONDOP expression COLON
 	"""
 # i say write
 # 	conditional_operator : CONDOP expression COLON expression
@@ -612,7 +640,7 @@ def p_literal_expression(p):
 def p_array_literal(p):
 	"""
 	array_literal : LBRACK array_literal_items RBRACK
-	| LBRACK RBRACK 
+	| LBRACK RBRACK
 	"""
 
 def p_array_literal_items(p):
@@ -624,12 +652,12 @@ def p_array_literal_items(p):
 
 def p_array_literal_item(p):
 	"""
-	array_literal_item : expression 
+	array_literal_item : expression
 	"""
 
 def p_paranthesized_expression(p):
 	"""
-	parenthesized_expression : LPAREN expression RPAREN 
+	parenthesized_expression : LPAREN expression RPAREN
 	"""
 
 # // GRAMMAR OF A POSTFIX EXPRESSION (inlined many rules from spec to avoid indirect left-recursion)
@@ -637,13 +665,13 @@ def p_postfix_expression(p):
 	"""
 	postfix_expression : primary_expression
 	| postfix_expression function_call_argument_clause
-	| postfix_expression DOT INIT 
+	| postfix_expression DOT INIT
 	| postfix_expression DOT INIT LPAREN argument_names RPAREN
 	| postfix_expression DOT INT_CONST
 	| postfix_expression DOT declaration_identifier
 	| postfix_expression DOT declaration_identifier LPAREN argument_names RPAREN
-	| postfix_expression LPAREN argument_names RPAREN 
-	| postfix_expression DOT SELF 
+	| postfix_expression LPAREN argument_names RPAREN
+	| postfix_expression DOT SELF
 	| postfix_expression LBRACK expression_list RBRACK
 	"""
 # postfix_expression /* ************************************************************************************************************ */
@@ -666,7 +694,7 @@ def p_postfix_expression(p):
 # // | postfix_expression '!'                                            # forced_value_expression
 # // ? is a postfix operator already
 # // | postfix_expression CONDOP                                            # optional_chaining_expression
-#  
+#
 
 
 # // GRAMMAR OF A FUNCTION CALL EXPRESSION
@@ -696,10 +724,10 @@ def p_function_call_argument(p):
 	"""
 
 # // GRAMMAR OF AN EXPLICIT MEMBER EXPRESSION
- 
+
 def p_arguement_names(p):
 	"""
-	argument_names : argument_name argument_name_star 
+	argument_names : argument_name argument_name_star
 	"""
 def p_argument_name_star(p): #*
 	"""
@@ -710,14 +738,14 @@ def p_argument_name_star(p): #*
 
 def p_arguement_name(p):
 	"""
-	argument_name : label_identifier COLON 
+	argument_name : label_identifier COLON
 	"""
 
 def p_type(p):
 	"""
-	type : array_type 
-	| function_type 
-	| type_identifier 
+	type : array_type
+	| function_type
+	| type_identifier
 	"""
 
 
@@ -755,7 +783,7 @@ def p_function_type(p):
 	function_type : function_type_argument_clause THROWS ARROW type
 	| function_type_argument_clause ARROW type
 	| function_type_argument_clause RETHROWS ARROW type
-	
+
 	"""
 
 def p_function_type_argument_clause(p):
@@ -769,7 +797,7 @@ def p_function_type_argument_list(p):
 	"""
 	function_type_argument_list : function_type_argument
 	| function_type_argument COMMA function_type_argument_list
-	
+
 	"""
 
 def p_function_type_argument(p):
@@ -777,17 +805,17 @@ def p_function_type_argument(p):
 	function_type_argument : INOUT type
 	| type
 	| argument_label type_annotation
-	
+
 	"""
 
 def p_arguement_label(p):
 	"""
-	argument_label : label_identifier 
+	argument_label : label_identifier
 	"""
 
 def p_array_type(p):
 	"""
-	array_type : LBRACK type RBRACK 
+	array_type : LBRACK type RBRACK
 	"""
 
 # ########LEXICAL STRUCTURE PART REMAINING##############
@@ -802,7 +830,7 @@ def p_identifier(p):
 # // var x = 1 funx x() {} class x {}
 def p_declaration_identifier(p):
 	"""
-	declaration_identifier : IDENTIFIER	
+	declaration_identifier : IDENTIFIER
 	"""
 
 
@@ -832,7 +860,7 @@ def p_postfix_operator(p):
 	"""
 
 # ('/' | '=' | '-' | '+' | '!' | '*' | '%' | '&'
-#  | '|' | '<' | '>' | '^' | '~' | '?') 
+#  | '|' | '<' | '>' | '^' | '~' | '?')
 def p_operator(p):
 	"""
 	operator : DIV
@@ -875,6 +903,11 @@ def p_literal(p):
 	| INT_CONST
 	| NIL_LITERAL
 	"""
+	p[0] = {}
+	p[0]['code'] = [""]
+	p[0]['value'] = p[1]
+
+
 
 ########################################################
 
@@ -894,7 +927,7 @@ def read_data(filename):
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print('Insufficient arguments!')
-        print('Format: python yacc.py test.js')
+        print('Format: python parser.py test.swift')
         sys.exit()
     filename = sys.argv[1]
     data = read_data(filename)
